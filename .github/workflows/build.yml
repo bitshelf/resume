@@ -3,7 +3,14 @@ name: Build Resume PDF
 on:
   push:
     branches: [main]
+    tags: ['v*']
   workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
 
 jobs:
   build:
@@ -11,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install TeX Live (full)
+      - name: Install TeX Live
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y -qq \
@@ -37,6 +44,6 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: resume.pdf
-          generate_release_notes: true
+          generate_release_notes: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
