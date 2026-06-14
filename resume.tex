@@ -1,0 +1,361 @@
+%============================================================================%
+%
+%    简历格式定制
+%
+%============================================================================%
+
+% 使用 A4 纸大小
+\documentclass[10pt,a4paper]{article}
+
+% 使用 utf8 编码
+\usepackage{xstring, xifthen}
+%-- 添加中文支持 (Overleaf XeLaTeX)
+\usepackage[UTF8,fontset=ubuntu]{ctex}
+
+%----------------------------------------------------------------------------------------
+%    字体设置
+%----------------------------------------------------------------------------------------
+%\usepackage[defaultsans]{droidsans}
+%\usepackage[default]{comfortaa}
+%\usepackage{cmbright}
+\usepackage[default,lining]{raleway}
+%\usepackage{fetamont}
+%\usepackage[default]{gillius}
+%\usepackage[light,math]{iwona}
+%\usepackage[thin]{roboto}
+
+% set font default
+\renewcommand*\familydefault{\sfdefault}
+
+% more font size definitions
+\usepackage{moresize}
+
+%----------------------------------------------------------------------------------------
+%    FONT AWESOME ICONS
+%----------------------------------------------------------------------------------------
+
+\usepackage{fontawesome5}
+
+% use to vertically center content
+\newcommand{\vcenteredinclude}[1]{\begingroup
+\setbox0=\hbox{\includegraphics{#1}}%
+\parbox{\wd0}{\box0}\endgroup}
+
+% use to vertically center content
+\newcommand*{\vcenteredhbox}[1]{\begingroup
+\setbox0=\hbox{#1}\parbox{\wd0}{\box0}\endgroup}
+
+% icon shortcut
+\newcommand{\icon}[3] {
+     \makebox(#2, #2){\textcolor{maincol}{\faIcon{#1}}}
+}
+
+% icon with text shortcut
+\newcommand{\icontext}[4]{
+    \vcenteredhbox{\icon{#1}{#2}{#3}}  \hspace{2pt}  \parbox{0.9\mpwidth}{\textcolor{#4}{#3}}
+}
+
+% icon with website url
+\newcommand{\iconhref}[5]{
+    \vcenteredhbox{\icon{#1}{#2}{#5}}  \hspace{2pt} \href{#4}{\textcolor{#5}{#3}}
+}
+
+% icon with email link
+\newcommand{\iconemail}[5]{
+    \vcenteredhbox{\icon{#1}{#2}{#5}}  \hspace{2pt} \href{mailto:#4}{\textcolor{#5}{#3}}
+}
+
+%----------------------------------------------------------------------------------------
+%    PAGE LAYOUT  DEFINITIONS
+%----------------------------------------------------------------------------------------
+
+% we use paracol to display breakable two columns
+\usepackage{paracol}
+
+% define page styles using geometry
+\usepackage[a4paper]{geometry}
+
+% remove all possible margins
+\geometry{top=1cm, bottom=1cm, left=1cm, right=1cm}
+
+\usepackage{fancyhdr}
+\pagestyle{empty}
+
+% indentation is zero
+\setlength{\parindent}{0mm}
+
+% suppress cosmetic hbox warnings
+\hbadness=10000
+\hfuzz=14pt
+
+%----------------------------------------------------------------------------------------
+%    TABLE /ARRAY DEFINITIONS
+%----------------------------------------------------------------------------------------
+
+% extended aligning of tabular cells
+\usepackage{array}
+
+% custom column right-align with fixed width
+\newcolumntype{x}[1]{%
+>{\raggedleft\hspace{0pt}}p{#1}}%
+
+
+%----------------------------------------------------------------------------------------
+%    GRAPHICS DEFINITIONS
+%----------------------------------------------------------------------------------------
+
+%for header image
+\usepackage{graphicx}
+
+%for drawing graphics
+\usepackage{tikz}
+\usetikzlibrary{shapes, backgrounds,mindmap, trees}
+
+%----------------------------------------------------------------------------------------
+%    Color DEFINITIONS
+%----------------------------------------------------------------------------------------
+\usepackage{color}
+
+% primary color
+\definecolor{maincol}{RGB}{ 225, 0, 0 }
+
+% dark color
+\definecolor{darkcol}{RGB}{ 70, 70, 70 }
+
+% light color
+\definecolor{lightcol}{RGB}{245,245,245}
+
+
+% Package for links, must be the last package used
+\usepackage[hidelinks]{hyperref}
+
+% returns minipage width minus two times \fboxsep
+\newcommand{\mpwidth}{\linewidth-\fboxsep-\fboxsep}
+
+
+
+%============================================================================%
+%
+%    CV COMMANDS
+%
+%============================================================================%
+
+%----------------------------------------------------------------------------------------
+%     CV LIST
+%----------------------------------------------------------------------------------------
+\newcommand{\cvlist}[1] {
+    \begin{itemize}#1\end{itemize}
+}
+
+%----------------------------------------------------------------------------------------
+%     CV TEXT
+%----------------------------------------------------------------------------------------
+\newcommand{\cvtext}[1] {
+    \begin{tabular*}{1\mpwidth}{p{0.98\mpwidth}}
+        \parbox{\linewidth}{#1}
+    \end{tabular*}
+}
+
+%----------------------------------------------------------------------------------------
+%    CV SECTION
+%----------------------------------------------------------------------------------------
+\newcommand{\cvsection}[1] {
+    \vspace{14pt}
+    \cvtext{
+        \textbf{\LARGE{\textcolor{darkcol}{\uppercase{#1}}}}\\[-4pt]
+        \textcolor{maincol}{ \rule{0.1\textwidth}{2pt} } \\
+    }
+}
+
+%----------------------------------------------------------------------------------------
+%    META SKILL
+%----------------------------------------------------------------------------------------
+
+\newcommand{\cvskill}[2] {
+    \begin{tabular*}{1\mpwidth}{p{0.72\mpwidth}}
+         \textcolor{black}{\textbf{#1}} \\
+    \end{tabular*}%
+
+    \hspace{4pt}
+    \begin{tikzpicture}[scale=1,rounded corners=2pt,very thin]
+        \fill [lightcol] (0,0) rectangle (1\mpwidth, 0.15);
+        \fill [maincol] (0,0) rectangle (#2\mpwidth, 0.15);
+      \end{tikzpicture}%
+}
+
+
+%----------------------------------------------------------------------------------------
+%     CV EVENT
+%----------------------------------------------------------------------------------------
+\newcommand{\cvevent}[7] {
+
+    \parbox{\mpwidth}{
+        \begin{tabular*}{1\mpwidth}{p{0.72\mpwidth}  r}
+             \textcolor{black}{\textbf{#2}} & \colorbox{maincol}{\makebox[0.25\mpwidth]{\textcolor{white}{#1}}} \\
+            \textcolor{maincol}{\textbf{#3}} & \\
+        \end{tabular*}\\[2pt]
+
+        \ifthenelse{\isempty{#4}}{}{
+            \cvtext{#4}%\\
+        }
+    }
+
+    \ifthenelse{\isempty{#5}}{}{
+        {#5}
+    }
+
+    \vspace{4pt}
+}
+
+% 技术点
+\newcommand{\cvnode}[1] {
+    \parbox{\mpwidth}{
+        \begin{tabular*}{1\mpwidth}{p{0.72\mpwidth}}
+             \textcolor{black}{\textbf{#1}}
+        \end{tabular*}
+    }
+}
+%----------------------------------------------------------------------------------------
+%     CV META EVENT
+%----------------------------------------------------------------------------------------
+\newcommand{\cvmetaevent}[4] {
+    \textcolor{maincol} {\cvtext{\textbf{\begin{flushleft}#1\end{flushleft}}}}
+
+    \ifthenelse{\isempty{#2}}{}{
+    \textcolor{darkcol} {\cvtext{\textbf{#2}} }
+    }
+
+    \ifthenelse{\isempty{#3}}{}{
+        \cvtext{{ \textcolor{darkcol} {#3} }}\\
+    }
+
+    \cvtext{#4}\\[14pt]
+}
+
+%---------------------------------------------------------------------------------------
+%    QR CODE
+%----------------------------------------------------------------------------------------
+\newcommand{\cvqrcode}[1] {
+    \begin{center}
+        \includegraphics[width={#1}\mpwidth]{assets/qrcode}
+    \end{center}
+}
+
+
+%============================================================================%
+%
+%    DOCUMENT CONTENT
+%
+%============================================================================%
+\begin{document}
+\columnratio{0.31}
+\setlength{\columnsep}{2.2em}
+\setlength{\columnseprule}{4pt}
+\colseprulecolor{lightcol}
+\begin{paracol}{2}
+\begin{leftcolumn}
+
+\cvsection{骆建志}
+
+
+\icontext{map-marker}{12}{深圳宝安}{black}\\[6pt]
+\icontext{university}{12}{烟台大学-轮机工程}{black}\\[6pt]
+\icontext{mobile-alt}{12}{177 8870 5330}{black}\\[6pt]
+\iconemail{envelope}{12}{ljzyx86@foxmail.com}{ljzyx86@foxmail.com}{black}\\[6pt]
+
+
+\cvsection{技能}
+
+\cvskill{C}  {0.9} \\[-2pt]
+
+\cvskill{Git}  {0.85} \\[-2pt]
+
+\cvskill{Linux}  {0.85} \\[-2pt]
+
+\cvskill{Open Source Tools}  {0.85} \\[-2pt]
+
+\cvskill{Makefile}  {0.8} \\[-2pt]
+
+
+% \vfill\null
+\cvqrcode{0.6}
+
+
+\vfill
+
+
+% \newpage % 新开一页
+\mbox{} % hotfix to place qrcode on the bottom when there are not other elements
+\vfill
+
+\end{leftcolumn}
+\begin{rightcolumn}
+
+\cvsection{工作经历}
+
+\cvevent
+    {2023.04 - 2024.06}
+    {深圳触觉智能}
+    {嵌入式软件工程师}
+    {负责 RK3588 Android BSP 移植定制、和 Android 代码维护}
+    {\cvlist{
+        \item 完成 Android repo 与单个 Git 仓库互相转化方法，提高团队协作，
+        \item 在 Android 移植 GPIO Character Device，解决 /sys/class/gpio 使用痛点
+        \item 为公司引入 Ubuntu Rootfs 构建新方式、解决 Ubuntu 维护痛点
+        % \item RK3588 Android BSP 移植维护及客户系统定制
+        \item RK3588s 三防平板 Android12 的 BSP 移植和系统定制
+        % \item RK356x Android 系统定制
+        % \item 为公司重要客户提供技术支持、协助客户进行量产
+        % \item 测试、解决自研开发板量产之前的各种问题
+}}
+
+
+\vfill\null
+\cvevent
+    {2021.10 - 2023.03}
+    {深圳荣品电子}
+    {嵌入式软件工程师}
+    {开发板售后的技术问题回复}
+    {\cvlist{
+         \item RK3568 双屏（MIPI）异显，异触（双$I^2C$）的项目定制
+        \item 反编译 Google 语音 App，内置本地语音包
+        \item 编写开发板文档，如入门文档、FAQ
+        \item 编写 shell 脚本，提高自动化流程
+        \item RK、Amlogic、全志开发板的测试及售后咨询
+          \item 更新原厂 SDK，外设接口的测试及问题解决
+        % \item 完成两家客户定制地板 BSP 移植和 Android 定制并量产
+}}
+
+\vfill\null
+\cvsection{技术栈}
+
+\cvnode
+    {软件}
+    {\cvlist{
+        \item 熟悉 Android BSP 移植及 AOSP 框架、编译
+        \item 熟悉 Git、善于使用 Git 做代码管理及定位 BUG
+        % \item 熟悉 Rockchip、Allwinner、Amlogic SDK的代码框架、修改
+        \item 熟悉 $I^2C$、LCD 等外设的适配调试，及各种外设的测试
+          % \item 熟悉常用的数据结构与算法
+        % \item 熟悉 LCD、Wi-Fi，Bluetooth、Codec、Ethernet 等外设移植
+        \item 熟悉 Ubuntu、buildroot 文件系统的编译定制
+        \item 熟悉 Linux 内核的常用调试方法，如 DYNAMIC\_DEBUG、kprobe
+        \item 了解 RK 平台在 Openharmony BSP 移植适配
+        \item 了解 Android App 和 NDK 编写和修改
+    }
+}
+
+\cvnode
+    {硬件}
+    {\cvlist{
+        \item 擅长与硬件工程师一起定位、解决疑难问题
+        \item 熟练根据原理图、datasheet、SOC TRM 进行 BSP 移植
+        \item 熟练使用示波器、万用表定位开发板问题
+        \item 了解一些常见外设的工作条件
+    }
+}
+
+
+\end{rightcolumn}
+\end{paracol}
+\end{document}
