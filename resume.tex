@@ -1,0 +1,97 @@
+%============================================================================%
+%
+%    骆建志 · 嵌入式软件工程师简历
+%    模板：Awesome-CV（awesome-cv.cls 随仓库分发，LPPL）
+%    编译：xelatex resume.tex && xelatex resume.tex
+%
+%============================================================================%
+\documentclass[11pt, a4paper]{awesome-cv}
+
+% 中文支持：TeX Live 自带 Fandol 字体，不依赖系统字体，构建可复现
+\usepackage[UTF8,fontset=fandol]{ctex}
+
+% 中文章节标题整体使用强调色，避免模板仅着色前三个字。
+\renewcommand*{\sectionstyle}[1]{{\color{awesome}\sectionstyleface{#1}}}
+
+% 单页排版：收紧上下边距（节间距保持模板默认）
+\geometry{left=1.6cm, right=1.6cm, top=1.2cm, bottom=1.1cm}
+
+%-------------------------------------------------------------------------------
+%    头部
+%-------------------------------------------------------------------------------
+\name{骆建志}{}
+\position{嵌入式软件工程师{\enspace·\enspace}BSP 移植 · 底层调试 · 系统构建}
+
+\begin{document}
+
+% 使用去掉城市和日期的页眉横幅；裁去生成图片上下的黑色留边。
+\noindent\includegraphics[width=\textwidth,trim=0 72bp 0 70bp,clip]{assets/resume-header-no-location-date.png}
+\par\vspace{2mm}
+
+%-------------------------------------------------------------------------------
+%    工作经历
+%-------------------------------------------------------------------------------
+\cvsection{工作经历}
+
+\begin{cventries}
+
+\cventry
+  {嵌入式软件工程师}
+  {米尔电子 (MYIR)}
+  {深圳}
+  {2024.07 - 至今}
+  {\begin{cvitems}
+    \item Rockchip、Allwinner aarch64 平台的系统客户定制与交付
+    \item openEuler、OpenHarmony 等新系统先行移植；Rockchip ISP、网络 Switch、SerDes 等外设适配
+    \item 持续优化 SDK 二次开发与文档使用体验，推动存量问题闭环解决
+    \item 机器人数据采集系统开发，基于 PWM 实现多摄像头同步
+    \item 疑难问题攻坚：解决个别 USB3.0 无法识别、eMMC 性能劣化导致应用 OTA 升级失败等问题；赴客户现场定位网络 Switch 随机掉线与设备掉电
+  \end{cvitems}}
+
+\cventry
+  {嵌入式软件工程师}
+  {深圳触觉智能}
+  {深圳}
+  {2023.04 - 2024.06}
+  {\begin{cvitems}
+    \item RK3588/RK3588s Android 平台 BSP 移植、系统维护与客户项目定制
+    \item Android 平板项目的外设移植适配：电池、全功能 Type-C、IMU、Camera
+    \item 设计 repo 与单 Git 仓库双向转换方案，兼顾多人协作效率与仓库性能
+    \item 优化 Android 开发与使用体验：引入 GPIO Character Device 驱动、预装微信输入法等实用组件
+  \end{cvitems}}
+
+\cventry
+  {嵌入式软件工程师}
+  {深圳荣品电子}
+  {深圳}
+  {2021.10 - 2023.03}
+  {\begin{cvitems}
+%   \item RK3568 双屏（MIPI）异显、异触（双 I2C）的项目定制
+    \item RK/全志/Amlogic 多平台 SDK 维护与客户量产支持，外设接口测试与疑难问题解决
+  \end{cvitems}}
+
+%\cventry
+%  {自学嵌入式 Linux}
+%  {职业转型期}
+%  {}
+%  {2019.06 - 2021.09}
+%  {从机械非标设计与变频器等工业电气设备维修起步，期间自学 C、Linux、网络与 ARM 开发板编程，转向嵌入式软件开发}
+
+\end{cventries}
+
+%-------------------------------------------------------------------------------
+%    技能
+%-------------------------------------------------------------------------------
+\cvsection{技能}
+
+\begin{cvskills}
+  \cvskill{开发方向}{嵌入式 Linux BSP 移植、外设适配与底层问题定位}
+  \cvskill{内核驱动}{设备树配置、字符设备驱动开发；使用 ftrace、kprobe、eBPF、kdump/crash 调试内核}
+  \cvskill{外设接口}{USB3.0、eMMC、I2C、Ethernet 等接口的适配与问题排查}
+  \cvskill{系统构建}{基于 Yocto、Buildroot、Debian/Ubuntu、AOSP 进行系统构建与定制}
+  \cvskill{芯片平台}{Rockchip（RK3576/3588/356x）、Amlogic、全志平台开发经验}
+  \cvskill{开发工具}{C、Shell、Python 编程；Git/repo 版本管理；Makefile、CMake 构建工具}
+  \cvskill{硬件调试}{结合原理图、datasheet 和 SoC TRM 适配外设；熟练使用示波器、万用表排查板级问题}
+\end{cvskills}
+
+\end{document}
