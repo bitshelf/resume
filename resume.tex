@@ -284,7 +284,7 @@
 \cvnode
     {软件}
     {\cvlist{
-        \item 熟悉 Linux 内核常用调试方法：ftrace、kprobe、eBPF、kdump-crash、DYNAMIC\_DEBUG
+        \item 熟悉 Linux 内核常用调试方法：ftrace、kprobe、eBPF、kdump-crash、\texttt{DYNAMIC\_DEBUG}
         \item 熟悉 USB3.0、PCIe、eMMC、MIPI、SDIO、I2C、SPI、UART 等总线/外设的适配与调试
         \item 熟悉 Yocto、Buildroot、Debian/Ubuntu 文件系统的构建定制（含 overlayfs 只读根）
         \item 熟悉 PTP1588/gPTP 时间同步，了解 TSN、EtherCAT
@@ -314,8 +314,8 @@
     {\cvlist{
         \item RK3576 USB3.0 眼图 Compliance 失败定位：区分 USBDP/Naneng 双 PHY 寄存器路径，
               判定短通道垂直余量坍缩，按 TX 摆幅、de-emphasis 顺序收敛并固化到驱动参数
-        \item RK3576 产线镜像方案：overlayfs 只读根 + 独立 data 分区 + extlinux FDTOVERLAYS，支撑产线刷写交付
-        \item eMMC 颗粒级故障排查：EXT\_CSD 健康度与降速对照实验定位 -84/-110 报错根因，换料交叉验证排除来料问题
+        \item RK3576 产线镜像方案：overlayfs 只读根 + 独立 data 分区 + extlinux \texttt{FDTOVERLAYS}，支撑产线刷写交付
+        \item eMMC 颗粒级故障排查：\texttt{EXT\_CSD} 健康度与降速对照实验定位 -84/-110 报错根因，换料交叉验证排除来料问题
         \item PTP1588 多机时钟同步：ptp4l 偏移收敛至几十 ns 量级，旧内核补齐 stmmac 硬件时间戳支持
         \item 维护 Yocto 构建体系：devtool、sstate、镜像瘦身与离线构建
 }}
