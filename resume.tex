@@ -211,7 +211,7 @@
 \newcommand{\cvnode}[1] {
     \parbox{\mpwidth}{
         \begin{tabular*}{1\mpwidth}{p{0.72\mpwidth}}
-             \textcolor{black}{\textbf{#1}}
+             \textcolor{maincol}{\textbf{#1}}
         \end{tabular*}
     }
 }
@@ -265,28 +265,8 @@
 \iconemail{envelope}{12}{luo\_jianzhi@foxmail.com}{luo\_jianzhi@foxmail.com}{black}\\[6pt]
 
 
-\cvsection{技能}
-
-\cvtext{
-\textbf{内核/驱动}：ftrace · kprobe · eBPF · crash · 设备树\\[2pt]
-\textbf{总线/外设}：USB3.0 · PCIe · eMMC · MIPI · I2C/SPI\\[2pt]
-\textbf{系统构建}：Yocto · Buildroot · Debian · AOSP\\[2pt]
-\textbf{专业方向}：BSP 移植 · PTP1588 时间同步 · 产线镜像方案\\[2pt]
-\textbf{语言}：C · Shell · Python\\[2pt]
-\textbf{工具}：Git · repo · Makefile · CMake
-}
-
-
-% \vfill\null
-\cvqrcode{0.6}
-
-
 \vfill
-
-
-% \newpage % 新开一页
-\mbox{} % hotfix to place qrcode on the bottom when there are not other elements
-\vfill
+\cvqrcode{0.5}
 
 \end{leftcolumn}
 \begin{rightcolumn}
@@ -309,9 +289,8 @@
         \item 熟悉 Yocto、Buildroot、Debian/Ubuntu 文件系统的构建定制（含 overlayfs 只读根）
         \item 熟悉 PTP1588/gPTP 时间同步，了解 TSN、EtherCAT
         \item 熟悉 Android BSP 移植及 AOSP 框架、编译
-        \item 熟悉 Git、善于使用 Git 做代码管理及定位 BUG
-        \item 了解 RK 平台在 Openharmony BSP 移植适配
-        \item 了解 Android App 和 NDK 编写和修改
+        \item 语言：C（主）、Shell、Python；版本管理 Git、repo
+        \item 了解 RK 平台 OpenHarmony BSP 适配、Android App 与 NDK 修改
     }
 }
 
