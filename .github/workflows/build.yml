@@ -14,7 +14,8 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    # 固定 24.04：ubuntu-latest 正迁移到 26，新 fleet 上 apt 偶发挂死（2026-10 观察）
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
 
