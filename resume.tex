@@ -187,7 +187,7 @@
 %----------------------------------------------------------------------------------------
 %     CV EVENT
 %----------------------------------------------------------------------------------------
-\newcommand{\cvevent}[7] {
+\newcommand{\cvevent}[5] {
 
     \parbox{\mpwidth}{
         \begin{tabular*}{1\mpwidth}{p{0.72\mpwidth}  r}
@@ -258,7 +258,7 @@
 \cvsection{骆建志}
 
 
-\icontext{map-marker}{12}{深圳宝安}{black}\\[6pt]
+\icontext{map-marker}{12}{深圳龙岗 · 坂田}{black}\\[6pt]
 \icontext{university}{12}{烟台大学}{black}\\[6pt]
 \icontext{graduation-cap}{12}{轮机工程 · 统招本科}{black}\\[6pt]
 \icontext{mobile-alt}{12}{177 8870 5330}{black}\\[6pt]
@@ -267,15 +267,14 @@
 
 \cvsection{技能}
 
-\cvskill{C}  {0.9} \\[-2pt]
-
-\cvskill{Git}  {0.85} \\[-2pt]
-
-\cvskill{Linux}  {0.85} \\[-2pt]
-
-\cvskill{Open Source Tools}  {0.85} \\[-2pt]
-
-\cvskill{Makefile}  {0.8} \\[-2pt]
+\cvtext{
+\textbf{内核/驱动}：ftrace · kprobe · eBPF · crash · 设备树\\[2pt]
+\textbf{总线/外设}：USB3.0 · PCIe · eMMC · MIPI · I2C/SPI\\[2pt]
+\textbf{系统构建}：Yocto · Buildroot · Debian · AOSP\\[2pt]
+\textbf{专业方向}：BSP 移植 · PTP1588 时间同步 · 产线镜像方案\\[2pt]
+\textbf{语言}：C · Shell · Python\\[2pt]
+\textbf{工具}：Git · repo · Makefile · CMake
+}
 
 
 % \vfill\null
@@ -298,6 +297,32 @@
 嵌入式软件工程师，Linux/Android BSP 与系统开发经验，以 Rockchip 平台（RK356x/RK3588/RK3576）为主。\\
 熟悉 Yocto、Buildroot、Debian/Ubuntu 系统构建定制，主导过产线只读镜像方案设计。\\
 擅长 USB3.0、eMMC、以太网等总线与外设的底层疑难定位，熟悉 PTP1588 时间同步与 ftrace/kprobe/crash 等内核调试手段。
+}
+
+\cvsection{技术栈}
+
+\cvnode
+    {软件}
+    {\cvlist{
+        \item 熟悉 Linux 内核常用调试方法：ftrace、kprobe、eBPF、kdump-crash、DYNAMIC\_DEBUG
+        \item 熟悉 USB3.0、PCIe、eMMC、MIPI、SDIO、I2C、SPI、UART 等总线/外设的适配与调试
+        \item 熟悉 Yocto、Buildroot、Debian/Ubuntu 文件系统的构建定制（含 overlayfs 只读根）
+        \item 熟悉 PTP1588/gPTP 时间同步，了解 TSN、EtherCAT
+        \item 熟悉 Android BSP 移植及 AOSP 框架、编译
+        \item 熟悉 Git、善于使用 Git 做代码管理及定位 BUG
+        \item 了解 RK 平台在 Openharmony BSP 移植适配
+        \item 了解 Android App 和 NDK 编写和修改
+    }
+}
+
+\cvnode
+    {硬件}
+    {\cvlist{
+        \item 擅长与硬件工程师一起定位、解决疑难问题
+        \item 熟练根据原理图、datasheet、SOC TRM 进行 BSP 移植
+        \item 熟练使用示波器、万用表定位开发板问题
+        \item 熟悉常见外设的工作条件与上电时序要求
+    }
 }
 
 \cvsection{工作经历}
@@ -356,32 +381,6 @@
         \item 集中自学 C 语言、Linux 与 ARM 开发板编程，完成嵌入式入门项目
         \item 2021.10 通过技术面试入职荣品电子，完成职业转型
 }}
-
-\cvsection{技术栈}
-
-\cvnode
-    {软件}
-    {\cvlist{
-        \item 熟悉 Linux 内核常用调试方法：ftrace、kprobe、eBPF、kdump-crash、DYNAMIC\_DEBUG
-        \item 熟悉 USB3.0、PCIe、eMMC、MIPI、SDIO、I2C、SPI、UART 等总线/外设的适配与调试
-        \item 熟悉 Yocto、Buildroot、Debian/Ubuntu 文件系统的构建定制（含 overlayfs 只读根）
-        \item 熟悉 PTP1588/gPTP 时间同步，了解 TSN、EtherCAT
-        \item 熟悉 Android BSP 移植及 AOSP 框架、编译
-        \item 熟悉 Git、善于使用 Git 做代码管理及定位 BUG
-        \item 了解 RK 平台在 Openharmony BSP 移植适配
-        \item 了解 Android App 和 NDK 编写和修改
-    }
-}
-
-\cvnode
-    {硬件}
-    {\cvlist{
-        \item 擅长与硬件工程师一起定位、解决疑难问题
-        \item 熟练根据原理图、datasheet、SOC TRM 进行 BSP 移植
-        \item 熟练使用示波器、万用表定位开发板问题
-        \item 熟悉常见外设的工作条件与上电时序要求
-    }
-}
 
 
 \end{rightcolumn}
