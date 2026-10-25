@@ -9,8 +9,8 @@
 
 % 使用 utf8 编码
 \usepackage{xstring, xifthen}
-%-- 添加中文支持 (Overleaf XeLaTeX)
-\usepackage[UTF8,fontset=ubuntu]{ctex}
+%-- 添加中文支持 (XeLaTeX)；fontset=fandol 使用 TeX Live 自带 Fandol 字体，不依赖系统字体，构建可复现
+\usepackage[UTF8,fontset=fandol]{ctex}
 
 %----------------------------------------------------------------------------------------
 %    字体设置
@@ -259,7 +259,8 @@
 
 
 \icontext{map-marker}{12}{深圳宝安}{black}\\[6pt]
-\icontext{university}{12}{烟台大学-轮机工程}{black}\\[6pt]
+\icontext{university}{12}{烟台大学}{black}\\[6pt]
+\icontext{graduation-cap}{12}{轮机工程 · 统招本科}{black}\\[6pt]
 \icontext{mobile-alt}{12}{177 8870 5330}{black}\\[6pt]
 \iconemail{envelope}{12}{ljzyx86@foxmail.com}{ljzyx86@foxmail.com}{black}\\[6pt]
 
@@ -291,15 +292,37 @@
 \end{leftcolumn}
 \begin{rightcolumn}
 
+\cvsection{简介}
+
+\cvtext{
+嵌入式软件工程师，Linux/Android BSP 与系统开发经验，以 Rockchip 平台（RK356x/RK3588/RK3576）为主。\\
+熟悉 Yocto、Buildroot、Debian/Ubuntu 系统构建定制，主导过产线只读镜像方案设计。\\
+擅长 USB3.0、eMMC、以太网等总线与外设的底层疑难定位，熟悉 PTP1588 时间同步与 ftrace/kprobe/crash 等内核调试手段。
+}
+
 \cvsection{工作经历}
+
+\cvevent
+    {2024.07 - 至今}
+    {米尔电子 (MYIR)}
+    {嵌入式软件工程师}
+    {负责 RK3576 等平台核心板/开发板 BSP 开发维护、Linux 系统构建与量产支持}
+    {\cvlist{
+        \item RK3576 USB3.0 眼图 Compliance 失败定位：区分 USBDP/Naneng 双 PHY 寄存器路径，
+              判定短通道垂直余量坍缩，按 TX 摆幅、de-emphasis 顺序收敛并固化到驱动参数
+        \item RK3576 产线镜像方案：overlayfs 只读根 + 独立 data 分区 + extlinux FDTOVERLAYS，支撑产线刷写交付
+        \item eMMC 颗粒级故障排查：EXT\_CSD 健康度与降速对照实验定位 -84/-110 报错根因，换料交叉验证排除来料问题
+        \item PTP1588 多机时钟同步：ptp4l 偏移收敛至几十 ns 量级，旧内核补齐 stmmac 硬件时间戳支持
+        \item 维护 Yocto 构建体系：devtool、sstate、镜像瘦身与离线构建
+}}
 
 \cvevent
     {2023.04 - 2024.06}
     {深圳触觉智能}
     {嵌入式软件工程师}
-    {负责 RK3588 Android BSP 移植定制、和 Android 代码维护}
+    {负责 RK3588 Android BSP 移植定制与代码维护}
     {\cvlist{
-        \item 完成 Android repo 与单个 Git 仓库互相转化方法，提高团队协作，
+        \item 自研 repo 与单个 Git 仓库双向转换方案，降低多仓协同与单仓 CI 切换成本
         \item 在 Android 移植 GPIO Character Device，解决 /sys/class/gpio 使用痛点
         \item 为公司引入 Ubuntu Rootfs 构建新方式、解决 Ubuntu 维护痛点
         % \item RK3588 Android BSP 移植维护及客户系统定制
@@ -309,16 +332,14 @@
         % \item 测试、解决自研开发板量产之前的各种问题
 }}
 
-
-\vfill\null
 \cvevent
     {2021.10 - 2023.03}
     {深圳荣品电子}
     {嵌入式软件工程师}
-    {开发板售后的技术问题回复}
+    {RK/全志/Amlogic 多平台 SDK 维护与客户技术支持}
     {\cvlist{
-         \item RK3568 双屏（MIPI）异显，异触（双$I^2C$）的项目定制
-        \item 反编译 Google 语音 App，内置本地语音包
+         \item RK3568 双屏（MIPI）异显，异触（双 I2C）的项目定制
+        \item 预置离线语音资源包，实现无网环境语音可用
         \item 编写开发板文档，如入门文档、FAQ
         \item 编写 shell 脚本，提高自动化流程
         \item RK、Amlogic、全志开发板的测试及售后咨询
@@ -326,20 +347,17 @@
         % \item 完成两家客户定制地板 BSP 移植和 Android 定制并量产
 }}
 
-\vfill\null
 \cvsection{技术栈}
 
 \cvnode
     {软件}
     {\cvlist{
+        \item 熟悉 Linux 内核常用调试方法：ftrace、kprobe、eBPF、kdump-crash、DYNAMIC\_DEBUG
+        \item 熟悉 USB3.0、PCIe、eMMC、MIPI、SDIO、I2C、SPI、UART 等总线/外设的适配与调试
+        \item 熟悉 Yocto、Buildroot、Debian/Ubuntu 文件系统的构建定制（含 overlayfs 只读根）
+        \item 熟悉 PTP1588/gPTP 时间同步，了解 TSN、EtherCAT
         \item 熟悉 Android BSP 移植及 AOSP 框架、编译
         \item 熟悉 Git、善于使用 Git 做代码管理及定位 BUG
-        % \item 熟悉 Rockchip、Allwinner、Amlogic SDK的代码框架、修改
-        \item 熟悉 $I^2C$、LCD 等外设的适配调试，及各种外设的测试
-          % \item 熟悉常用的数据结构与算法
-        % \item 熟悉 LCD、Wi-Fi，Bluetooth、Codec、Ethernet 等外设移植
-        \item 熟悉 Ubuntu、buildroot 文件系统的编译定制
-        \item 熟悉 Linux 内核的常用调试方法，如 DYNAMIC\_DEBUG、kprobe
         \item 了解 RK 平台在 Openharmony BSP 移植适配
         \item 了解 Android App 和 NDK 编写和修改
     }
@@ -351,7 +369,7 @@
         \item 擅长与硬件工程师一起定位、解决疑难问题
         \item 熟练根据原理图、datasheet、SOC TRM 进行 BSP 移植
         \item 熟练使用示波器、万用表定位开发板问题
-        \item 了解一些常见外设的工作条件
+        \item 熟悉常见外设的工作条件与上电时序要求
     }
 }
 
