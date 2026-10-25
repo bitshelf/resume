@@ -20,19 +20,24 @@ jobs:
       - uses: actions/checkout@v4
 
       # 按需安装（与 build.sh 依赖映射一致），替代 texlive-full；
-      # Fandol 中文字体随 texlive-lang-chinese 提供，无需系统字体包
+      # Fandol 中文字体随 texlive-lang-chinese 提供，无需系统字体包；
+      # apt 在个别 runner 上会挂死：单次 240s 超时 + 3 次重试自愈
       - name: Install TeX Live
+        timeout-minutes: 15
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y -qq --no-install-recommends \
-            texlive-xetex \
-            texlive-latex-recommended \
-            texlive-latex-extra \
-            texlive-fonts-recommended \
-            texlive-pictures \
-            texlive-fonts-extra \
-            texlive-lang-chinese \
-            poppler-utils
+          pkgs="texlive-xetex texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended texlive-pictures texlive-fonts-extra texlive-lang-chinese poppler-utils"
+          for i in 1 2 3; do
+            if sudo timeout 240 apt-get install -y -qq --no-install-recommends $pkgs; then
+              echo "apt install OK (attempt $i)"
+              exit 0
+            fi
+            echo "attempt $i hung/failed, cleaning dpkg state and retrying..."
+            sudo dpkg --configure -a || true
+            sleep 10
+          done
+          echo "apt install failed after 3 attempts"
+          exit 1
 
       - name: Compile (first pass)
         run: xelatex -interaction=nonstopmode -halt-on-error resume.tex
