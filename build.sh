@@ -17,6 +17,7 @@ REQUIRED_DEPS=(
     "texlive-latex-recommended:sty:fancyhdr.sty"
     "texlive-latex-extra:sty:moresize.sty"
     "texlive-latex-extra:sty:paracol.sty"
+    "texlive-fonts-recommended:sty:pzdr.tfm"
     "texlive-pictures:sty:tikz.sty"
     "texlive-fonts-extra:sty:raleway.sty"
     "texlive-fonts-extra:sty:fontawesome5.sty"

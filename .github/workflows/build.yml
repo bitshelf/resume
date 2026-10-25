@@ -27,6 +27,7 @@ jobs:
             texlive-xetex \
             texlive-latex-recommended \
             texlive-latex-extra \
+            texlive-fonts-recommended \
             texlive-pictures \
             texlive-fonts-extra \
             texlive-lang-chinese \
