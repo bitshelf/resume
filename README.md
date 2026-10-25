@@ -8,7 +8,9 @@
 
 ## 预览
 
-![简历预览](https://github.com/bitshelf/resume/releases/download/latest/preview-1.png)
+| 第 1 页 | 第 2 页 |
+|:---:|:---:|
+| ![第 1 页](https://github.com/bitshelf/resume/releases/download/latest/preview-1.png) | ![第 2 页](https://github.com/bitshelf/resume/releases/download/latest/preview-2.png) |
 
 ## 方向
 
