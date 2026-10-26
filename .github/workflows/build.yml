@@ -51,15 +51,7 @@ jobs:
       - name: Render preview images
         run: pdftoppm -png -r 110 resume.pdf preview
 
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: resume
-          path: |
-            resume.pdf
-            preview-*.png
-          if-no-files-found: error
-
+      # 制品不上传（私有库存储配额有限），PDF/预览图一律走 Release 资产分发
       # main 每次推送更新滚动 Release，提供稳定分享链接：
       # https://github.com/bitshelf/resume/releases/download/latest/resume.pdf
       - name: Rolling latest release
