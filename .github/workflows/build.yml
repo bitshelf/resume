@@ -25,18 +25,20 @@ jobs:
       - name: Install TeX Live
         timeout-minutes: 15
         run: |
-          sudo apt-get update -qq
-          pkgs="texlive-xetex texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended texlive-pictures texlive-fonts-extra texlive-lang-chinese poppler-utils"
           for i in 1 2 3; do
-            if sudo timeout 240 apt-get install -y -qq --no-install-recommends $pkgs; then
+            sudo timeout 120 apt-get update -qq || { echo "apt update attempt $i failed"; sleep 5; continue; }
+            if sudo timeout 240 apt-get install -y -qq --no-install-recommends \
+                texlive-xetex texlive-latex-recommended texlive-latex-extra \
+                texlive-fonts-recommended texlive-pictures texlive-fonts-extra \
+                texlive-lang-chinese poppler-utils; then
               echo "apt install OK (attempt $i)"
               exit 0
             fi
             echo "attempt $i hung/failed, cleaning dpkg state and retrying..."
-            sudo dpkg --configure -a || true
+            sudo timeout 120 dpkg --configure -a || true
             sleep 10
           done
-          echo "apt install failed after 3 attempts"
+          echo "apt failed after 3 attempts"
           exit 1
 
       - name: Compile (first pass)
