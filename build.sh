@@ -13,7 +13,7 @@ PDF_FILE="$SCRIPT_DIR/resume.pdf"
 # format: "pkg_name:check_type:check_target"
 # check_type = "sty" (kpsewhich) or "bin" (command -v)
 REQUIRED_DEPS=(
-    "texlive-luatex:bin:lualatex"
+    "texlive-xetex:bin:xelatex"
     "texlive-latex-recommended:sty:fancyhdr.sty"
     "texlive-latex-extra:sty:moresize.sty"
     "texlive-latex-extra:sty:paracol.sty"
@@ -54,10 +54,10 @@ fi
 # Compile (two passes to resolve any cross-refs)
 #-------------------------------------------------------------------------------
 echo "=== Compiling (pass 1/2) ==="
-lualatex -interaction=nonstopmode -halt-on-error "$TEX_FILE"
+xelatex -interaction=nonstopmode -halt-on-error "$TEX_FILE"
 
 echo "=== Compiling (pass 2/2) ==="
-lualatex -interaction=nonstopmode -halt-on-error "$TEX_FILE"
+xelatex -interaction=nonstopmode -halt-on-error "$TEX_FILE"
 
 #-------------------------------------------------------------------------------
 # Cleanup aux files

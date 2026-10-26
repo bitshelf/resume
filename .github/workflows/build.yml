@@ -29,7 +29,7 @@ jobs:
             sudo timeout 120 apt-get update -qq || { echo "apt update attempt $i failed"; sleep 5; continue; }
             if sudo timeout 480 apt-get install -y -qq --no-install-recommends \
                 -o Acquire::Retries=5 \
-                texlive-xetex texlive-luatex texlive-latex-recommended texlive-latex-extra \
+                texlive-xetex texlive-latex-recommended texlive-latex-extra \
                 texlive-fonts-recommended texlive-pictures texlive-fonts-extra \
                 texlive-lang-chinese poppler-utils; then
               echo "apt install OK (attempt $i)"
@@ -43,10 +43,10 @@ jobs:
           exit 1
 
       - name: Compile (first pass)
-        run: lualatex -interaction=nonstopmode -halt-on-error resume.tex
+        run: xelatex -interaction=nonstopmode -halt-on-error resume.tex
 
       - name: Compile (second pass)
-        run: lualatex -interaction=nonstopmode -halt-on-error resume.tex
+        run: xelatex -interaction=nonstopmode -halt-on-error resume.tex
 
       - name: Render preview images
         run: pdftoppm -png -r 110 resume.pdf preview

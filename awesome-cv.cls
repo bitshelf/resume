@@ -24,12 +24,11 @@
 \ProvidesClass{awesome-cv}[2017/02/05 v1.6.1 Awesome Curriculum Vitae Class]
 \NeedsTeXFormat{LaTeX2e}
 
-% LuaLaTeX is required for the HarfBuzz font renderer used below.
+% 引擎要求：原版强制 LuaLaTeX（HarfBuzz 渲染）；本仓库放宽为 XeLaTeX 亦可
+% （XeLaTeX 下 ctex 走 xeCJK + Fandol，避免引入 luatexja 依赖）
 \RequirePackage{iftex}
 \ifluatex\else
-  \ClassError{awesome-cv}{LuaLaTeX is required}
-    {Run latexmk from the repository root, or select LuaLaTeX in your editor.}
-  \expandafter\endinput
+  \RequireXeTeX
 \fi
 
 
@@ -84,9 +83,12 @@
 % Needed to use icons from font-awesome
 \RequirePackage{fontawesome5}
 \RequirePackage{accsupp}
-\defaultfontfeatures{
-  Renderer=HarfBuzz,
-}
+% HarfBuzz 渲染器仅 LuaLaTeX 可选；XeLaTeX 内建 HarfBuzz，无需该选项
+\ifluatex
+  \defaultfontfeatures{
+    Renderer=HarfBuzz,
+  }
+\fi
 % 字体文件随仓库分发（fonts/ 目录），按文件名加载，构建可复现
 \setmainfont{SourceSans3}[
   Path = fonts/,
