@@ -10,8 +10,10 @@
 % 中文支持：TeX Live 自带 Fandol 字体，不依赖系统字体，构建可复现
 \usepackage[UTF8,fontset=fandol]{ctex}
 
-% 单页排版：略收紧默认边距
-\geometry{left=1.6cm, right=1.6cm, top=1.5cm, bottom=1.5cm}
+% 单页排版：收紧边距与节间距
+\geometry{left=1.6cm, right=1.6cm, top=1.2cm, bottom=1.1cm}
+\renewcommand{\acvSectionTopSkip}{2mm}
+\renewcommand{\acvSectionContentTopSkip}{1.5mm}
 
 %-------------------------------------------------------------------------------
 %    头部
