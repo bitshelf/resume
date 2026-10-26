@@ -22,11 +22,11 @@
 
 ```bash
 ./build.sh                # Linux + apt：自动检查/安装依赖并编译
-# 或手动编译（需要 XeLaTeX）：
-xelatex resume.tex && xelatex resume.tex
+# 或手动编译（需要 LuaLaTeX，模板要求）：
+lualatex resume.tex && lualatex resume.tex
 ```
 
-中文使用 TeX Live 自带的 Fandol 字体（`fontset=fandol`），不依赖系统字体，本地与 CI 构建结果一致。
+模板为 Awesome-CV（LPPL，见 awesome-cv-LICENCE.txt），拉丁字体 Source Sans 3 随仓库分发（`fonts/`），中文使用 TeX Live 自带的 Fandol 字体（`fontset=fandol`），不依赖任何系统字体，本地与 CI 构建结果一致。
 
 ## 仓库结构
 
