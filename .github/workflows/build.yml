@@ -23,20 +23,21 @@ jobs:
       # Fandol 中文字体随 texlive-lang-chinese 提供，无需系统字体包；
       # apt 在个别 runner 上会挂死：单次 240s 超时 + 3 次重试自愈
       - name: Install TeX Live
-        timeout-minutes: 15
+        timeout-minutes: 30
         run: |
           for i in 1 2 3; do
             sudo timeout 120 apt-get update -qq || { echo "apt update attempt $i failed"; sleep 5; continue; }
-            if sudo timeout 240 apt-get install -y -qq --no-install-recommends \
+            if sudo timeout 480 apt-get install -y -qq --no-install-recommends \
+                -o Acquire::Retries=5 \
                 texlive-xetex texlive-luatex texlive-latex-recommended texlive-latex-extra \
                 texlive-fonts-recommended texlive-pictures texlive-fonts-extra \
                 texlive-lang-chinese poppler-utils; then
               echo "apt install OK (attempt $i)"
               exit 0
             fi
-            echo "attempt $i hung/failed, cleaning dpkg state and retrying..."
-            sudo timeout 120 dpkg --configure -a || true
-            sleep 10
+            echo "attempt $i timed out/failed, dpkg state fix and retry (已下载包保留缓存增量续传)"
+            sudo timeout 180 dpkg --configure -a || true
+            sleep 5
           done
           echo "apt failed after 3 attempts"
           exit 1
