@@ -23,14 +23,14 @@
 
 \makecvheader
 
-% 右上角信息块：学历两行在二维码右侧，电话/邮箱一行在其下方
+% 右上角信息块：学历两行在二维码右侧，电话/邮箱一行在其下方（整体收进一个 tabular）
 \begin{tikzpicture}[remember picture, overlay]
   \node[anchor=north east, inner sep=0pt] at ([xshift=-1.45cm, yshift=-1.2cm]current page.north east) {%
     \begin{tabular}{@{}c@{\hspace{7pt}}r@{}}
       \includegraphics[width=1.7cm]{assets/qrcode} & {\scriptsize\color{darktext} 烟台大学}\\[-1pt]
-                                                       & {\scriptsize\color{darktext} 轮机工程·统招本科}\\
-    \end{tabular}\\[4pt]
-    {\scriptsize\color{darktext} 177-8870-5330{\enspace·\enspace}luo\_jianzhi@foxmail.com}};
+                                                       & {\scriptsize\color{darktext} 轮机工程·统招本科}\\[3pt]
+      \multicolumn{2}{r@{}}{\scriptsize\color{darktext} 177-8870-5330{\enspace·\enspace}luo\_jianzhi@foxmail.com}\\
+    \end{tabular}};
 \end{tikzpicture}
 
 %-------------------------------------------------------------------------------
