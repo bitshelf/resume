@@ -45,11 +45,11 @@
   {深圳}
   {2024.07 - 至今}
   {\begin{cvitems}
-    \item RK3576 USB3.0 眼图 Compliance 失败定位：区分 USBDP/Naneng 双 PHY 寄存器路径，判定短通道垂直余量坍缩，按 TX 摆幅、de-emphasis 顺序收敛并固化到驱动参数
-    \item RK3576 产线镜像方案：overlayfs 只读根 + 独立 data 分区 + extlinux \texttt{FDTOVERLAYS}，支撑产线刷写交付
-    \item eMMC 颗粒级故障排查：\texttt{EXT\_CSD} 健康度与降速对照实验定位 -84/-110 报错根因，换料交叉验证排除来料问题
-    \item PTP1588 多机时钟同步：ptp4l 偏移收敛至几十 ns 量级，旧内核补齐 stmmac 硬件时间戳支持
-    \item 维护 Yocto 构建体系：devtool、sstate、镜像瘦身与离线构建
+    \item Rockchip、Allwinner aarch64 平台的系统客户定制与交付
+    \item openEuler、OpenHarmony 等新系统先行移植；Rockchip ISP、网络 Switch、SerDes 等外设适配
+    \item 持续优化 SDK 二次开发与文档使用体验，推动存量问题闭环解决
+    \item 机器人数据采集系统开发，基于 PWM 实现多摄像头同步
+    \item 疑难问题攻坚：解决个别 USB3.0 无法识别、eMMC 性能劣化导致应用 OTA 升级失败等问题；赴客户现场定位网络 Switch 随机掉线与设备掉电
   \end{cvitems}}
 
 \cventry
@@ -58,9 +58,10 @@
   {深圳}
   {2023.04 - 2024.06}
   {\begin{cvitems}
-    \item RK3588s 三防平板 Android 12 的 BSP 移植和系统定制
-    \item 自研 repo 与单个 Git 仓库双向转换方案，引入 Ubuntu Rootfs 新构建流程，降低维护成本
-    \item 在 Android 移植 GPIO Character Device，解决 /sys/class/gpio 使用痛点
+    \item RK3588/RK3588s Android 平台 BSP 移植、系统维护与客户项目定制
+    \item Android 平板项目的外设移植适配：电池、全功能 Type-C、IMU、Camera
+    \item 设计 repo 与单 Git 仓库双向转换方案，兼顾多人协作效率与仓库性能
+    \item 优化 Android 开发与使用体验：引入 GPIO Character Device 驱动、预装微信输入法等实用组件
   \end{cvitems}}
 
 \cventry
@@ -69,9 +70,8 @@
   {深圳}
   {2021.10 - 2023.03}
   {\begin{cvitems}
-    \item RK3568 双屏（MIPI）异显、异触（双 I2C）的项目定制
-    \item RK/全志/Amlogic 多平台 SDK 维护，外设接口测试与疑难问题解决
-    \item 预置离线语音资源包，实现无网环境语音可用
+%   \item RK3568 双屏（MIPI）异显、异触（双 I2C）的项目定制
+    \item RK/全志/Amlogic 多平台 SDK 维护与客户量产支持，外设接口测试与疑难问题解决
   \end{cvitems}}
 
 \cventry
@@ -79,7 +79,7 @@
   {职业转型期}
   {}
   {2019.06 - 2021.09}
-  {从机械/电气方向转向嵌入式软件：变频器等工业电气设备维修中接触功率器件与控制板卡，集中自学 C、Linux 与 ARM 开发板编程，2021.10 通过技术面试入职荣品电子}
+  {从机械非标设计与变频器等工业电气设备维修起步，期间自学 C、Linux、网络与 ARM 开发板编程，转向嵌入式软件开发}
 
 \end{cventries}
 
@@ -90,9 +90,9 @@
 
 \begin{cvskills}
   \cvskill{内核/驱动}{设备树、字符设备驱动；ftrace、kprobe、eBPF、kdump-crash}
-  \cvskill{总线/外设}{USB3.0、PCIe、eMMC、MIPI、SDIO、I2C、SPI、UART、Ethernet}
-  \cvskill{系统构建}{Yocto、Buildroot、Debian/Ubuntu（overlayfs 只读根）、AOSP}
-  \cvskill{专业方向}{BSP 移植、PTP1588/gPTP 时间同步、产线镜像交付}
+  \cvskill{总线/外设}{USB3.0、eMMC、I2C、Ethernet}
+  \cvskill{系统构建}{Yocto、Buildroot、Debian/Ubuntu、AOSP}
+  \cvskill{专业方向}{BSP 移植、底层外设调试}
   \cvskill{平台}{Rockchip（RK3576/3588/356x）、Amlogic、全志}
   \cvskill{语言/工具}{C、Shell、Python；Git、repo、Makefile、CMake}
   \cvskill{硬件}{依据原理图、datasheet、SOC TRM 移植；示波器、万用表定位问题}
