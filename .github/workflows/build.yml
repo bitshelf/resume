@@ -14,42 +14,25 @@ env:
 
 jobs:
   build:
-    # 固定 24.04：ubuntu-latest 正迁移到 26，新 fleet 上 apt 偶发挂死（2026-10 观察）
+    # 只用 checkout/docker/release，不再依赖 runner 的 apt（Ubuntu 源在部分 runner 上
+    # 反复挂死/超慢，2026-10 连续多晚观察到）；TeX Live 由预装镜像提供
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
 
-      # 按需安装（与 build.sh 依赖映射一致），替代 texlive-full；
-      # Fandol 中文字体随 texlive-lang-chinese 提供，无需系统字体包；
-      # apt 在个别 runner 上会挂死：单次 240s 超时 + 3 次重试自愈
-      - name: Install TeX Live
-        timeout-minutes: 30
-        run: |
-          for i in 1 2 3; do
-            sudo timeout 120 apt-get update -qq || { echo "apt update attempt $i failed"; sleep 5; continue; }
-            if sudo timeout 480 apt-get install -y -qq --no-install-recommends \
-                -o Acquire::Retries=5 \
-                texlive-xetex texlive-latex-recommended texlive-latex-extra \
-                texlive-fonts-recommended texlive-pictures texlive-fonts-extra \
-                texlive-lang-chinese poppler-utils; then
-              echo "apt install OK (attempt $i)"
-              exit 0
-            fi
-            echo "attempt $i timed out/failed, dpkg state fix and retry (已下载包保留缓存增量续传)"
-            sudo timeout 180 dpkg --configure -a || true
-            sleep 5
-          done
-          echo "apt failed after 3 attempts"
-          exit 1
+      - name: Build PDF
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: resume.tex
+          latexmk_use_xelatex: true
+          args: "-interaction=nonstopmode -halt-on-error"
 
-      - name: Compile (first pass)
-        run: xelatex -interaction=nonstopmode -halt-on-error resume.tex
-
-      - name: Compile (second pass)
-        run: xelatex -interaction=nonstopmode -halt-on-error resume.tex
-
+      # 预览图：alpine 容器装 poppler（apk 走 Alpine CDN，绕开 Ubuntu 源）
       - name: Render preview images
-        run: pdftoppm -png -r 110 resume.pdf preview
+        run: |
+          docker run --rm -v "$PWD:/work" -w /work alpine:3.20 \
+            sh -c "apk add -q poppler-utils && pdftoppm -png -r 110 resume.pdf preview"
+          ls preview-*.png
 
       # 制品不上传（私有库存储配额有限），PDF/预览图一律走 Release 资产分发
       # main 每次推送更新滚动 Release，提供稳定分享链接：
