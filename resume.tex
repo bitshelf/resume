@@ -17,19 +17,19 @@
 %    头部
 %-------------------------------------------------------------------------------
 \name{骆建志}{}
-\position{嵌入式软件工程师{\enspace·\enspace}BSP 移植 · 底层调试 · 系统构建\\烟台大学{\enspace·\enspace}轮机工程{\enspace·\enspace}统招本科}
-\address{深圳 · 龙岗坂田}
-\mobile{177-8870-5330}
+\position{嵌入式软件工程师{\enspace·\enspace}BSP 移植 · 底层调试 · 系统构建}
 \email{luo\_jianzhi@foxmail.com}
 
 \begin{document}
 
 \makecvheader
 
-% 二维码：右上角悬浮（与头部左侧文字不重叠）
+% 右上角：二维码 + 学历/电话（悬浮层，右对齐，不与居中头部文字重叠）
 \begin{tikzpicture}[remember picture, overlay]
-  \node[anchor=north east, inner sep=0pt] at ([xshift=-1.5cm, yshift=-1.4cm]current page.north east) {%
-    \includegraphics[width=2.0cm]{assets/qrcode}};
+  \node[anchor=north east, align=right, inner sep=0pt] at ([xshift=-1.5cm, yshift=-1.4cm]current page.north east) {%
+    \includegraphics[width=2.0cm]{assets/qrcode}\\[4pt]
+    {\footnotesize\color{darktext} 烟台大学 · 轮机工程 · 统招本科}\\[1pt]
+    {\footnotesize\color{darktext} 177-8870-5330}};
 \end{tikzpicture}
 
 %-------------------------------------------------------------------------------
