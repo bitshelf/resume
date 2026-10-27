@@ -24,12 +24,12 @@
 
 \makecvheader
 
-% 右上角：二维码 + 学历/电话（悬浮层，右对齐，不与居中头部文字重叠）
+% 右上角：二维码 + 学历/电话（悬浮层，右对齐；整体收在「工作经历」分节线之上）
 \begin{tikzpicture}[remember picture, overlay]
-  \node[anchor=north east, align=right, inner sep=0pt] at ([xshift=-1.5cm, yshift=-1.4cm]current page.north east) {%
-    \includegraphics[width=2.0cm]{assets/qrcode}\\[4pt]
-    {\footnotesize\color{darktext} 烟台大学 · 轮机工程 · 统招本科}\\[1pt]
-    {\footnotesize\color{darktext} 177-8870-5330}};
+  \node[anchor=north east, align=right, inner sep=0pt] at ([xshift=-1.5cm, yshift=-1.25cm]current page.north east) {%
+    \includegraphics[width=1.8cm]{assets/qrcode}\\[3pt]
+    {\scriptsize\color{darktext} 烟台大学 · 轮机工程 · 统招本科}\\[0.5pt]
+    {\scriptsize\color{darktext} 177-8870-5330}};
 \end{tikzpicture}
 
 %-------------------------------------------------------------------------------
