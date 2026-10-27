@@ -697,7 +697,8 @@
           \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
           \@extrainfo%
         }%
-    } \\[\acvHeaderAfterSocialSkip]%
+    }%
+    \ifhmode\\[\acvHeaderAfterSocialSkip]\else\vspace{\acvHeaderAfterSocialSkip}\fi%
     \ifthenelse{\isundefined{\@quote}}%
       {}%
       {\headerquotestyle{\@quote\\}\vspace{\acvHeaderAfterQuoteSkip}}%
