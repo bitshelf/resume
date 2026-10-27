@@ -27,14 +27,26 @@ jobs:
           latexmk_use_xelatex: true
           args: "-interaction=nonstopmode -halt-on-error"
 
-      # 预览图：alpine 容器装 poppler（apk 走 Alpine CDN，绕开 Ubuntu 源）
+      # 预览图：alpine 容器 + mupdf 栅格化（apk 走 Alpine CDN 绕开 Ubuntu 源；
+      # 注意 poppler 无法渲染 xelatex+Fandol 的 CFF 字形子集，勿换回 pdftoppm）
       - name: Render preview images
         run: |
           docker run --rm -v "$PWD:/work" -w /work alpine:3.20 \
-            sh -c "apk add -q poppler-utils && pdftoppm -png -r 110 resume.pdf preview"
+            sh -c "apk add -q mupdf-tools && mutool draw -o preview-%d.png -r 110 resume.pdf"
           ls preview-*.png
 
       # 制品不上传（私有库存储配额有限），PDF/预览图一律走 Release 资产分发
+      # 先清空滚动 Release 的旧资产（页数变化时避免残留过期预览图），再上传新文件
+      - name: Clean stale release assets
+        if: github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for id in $(gh api "repos/${{ github.repository }}/releases/tags/latest" --jq '.assets[].id' 2>/dev/null); do
+            gh api -X DELETE "repos/${{ github.repository }}/releases/assets/$id" && echo "deleted old asset $id"
+          done
+          true
+
       # main 每次推送更新滚动 Release，提供稳定分享链接：
       # https://github.com/bitshelf/resume/releases/download/latest/resume.pdf
       - name: Rolling latest release
