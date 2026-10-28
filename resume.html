@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="骆建志 · 嵌入式软件工程师，BSP 移植、底层调试与系统构建">
+  <title>骆建志 · 嵌入式软件工程师</title>
+  <style>
+    @font-face { font-family: Noto; src: url('fonts/NotoSansSC.ttf') format('truetype'); font-weight: 100 900; font-display: swap; }
+    @font-face { font-family: Source; src: url('fonts/SourceSans3-Regular.otf') format('opentype'); font-weight: 400; }
+    @font-face { font-family: Source; src: url('fonts/SourceSans3-Bold.otf') format('opentype'); font-weight: 700; }
+    :root { --red: #d91c26; --ink: #222b35; --muted: #66717d; --line: #dce1e6; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #edf0f3; color: var(--ink); font-family: Source, Noto, sans-serif; font-size: 10pt; line-height: 1.65; }
+    .resume { width: 210mm; min-height: 297mm; margin: 24px auto; padding: 14mm 16mm; background: white; box-shadow: 0 8px 40px #192b3d12; }
+    a { color: inherit; text-decoration: none; }
+    a:hover { color: var(--red); }
+    .hero { display: grid; grid-template-columns: 1fr auto; gap: 14px; align-items: center; padding-bottom: 7mm; border-bottom: 3px solid var(--red); }
+    h1 { margin: 0; font-size: 37pt; font-weight: 700; line-height: 1.2; letter-spacing: 2px; }
+    h1 span { color: var(--red); }
+    .roman { margin: 7px 0 16px; color: var(--muted); font-size: 10pt; letter-spacing: 3px; }
+    .role { margin: 0 0 5px; font-size: 14pt; font-weight: 700; }
+    .focus { margin: 0; font-size: 10pt; color: var(--muted); }
+    .focus span { color: var(--red); padding: 0 7px; }
+    .profile { display: grid; grid-template-columns: 20mm auto; gap: 6px 12px; align-items: center; }
+    .qr { width: 20mm; height: 20mm; object-fit: contain; }
+    .education { line-height: 1.8; font-size: 9pt; }
+    .education strong { font-size: 10pt; }
+    .contacts { grid-column: 1 / -1; display: grid; gap: 2px; margin-top: 4px; font-size: 9pt; white-space: nowrap; }
+    .contact-label { display: inline-block; width: 30px; color: var(--red); font-size: 8pt; }
+    section { margin-top: 7mm; }
+    h2 { display: flex; align-items: center; gap: 12px; margin: 0 0 4mm; font-size: 17pt; line-height: 1.3; color: var(--red); }
+    h2::after { content: ''; height: 1px; flex: 1; background: var(--line); }
+    .job { margin-bottom: 5mm; break-inside: avoid; }
+    .job:last-child { margin-bottom: 0; }
+    .job-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+    h3 { margin: 0; font-size: 11.5pt; font-weight: 700; }
+    .location { color: var(--muted); font-size: 9pt; }
+    .job-meta { display: flex; justify-content: space-between; gap: 12px; margin: 1mm 0 2mm; font-size: 9pt; color: var(--muted); }
+    .dates { font-variant-numeric: tabular-nums; white-space: nowrap; }
+    ul { margin: 0; padding-left: 1.2em; }
+    li { margin: 0.6mm 0; padding-left: 1px; }
+    li::marker { color: var(--red); font-size: 0.8em; }
+    .skills { display: grid; grid-template-columns: 22mm 1fr; gap: 2mm 3mm; margin: 0; }
+    dt { font-weight: 700; }
+    dd { margin: 0; }
+    @page { size: A4; margin: 0; }
+    @media print {
+      html, body { width: 210mm; margin: 0; background: white; }
+      body { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      .resume { margin: 0; box-shadow: none; }
+      a:hover { color: inherit; }
+    }
+    @media screen and (max-width: 800px) {
+      body { background: white; }
+      .resume { width: 100%; min-height: auto; margin: 0; padding: 28px 22px; box-shadow: none; }
+      .hero { grid-template-columns: 1fr; gap: 24px; }
+      .profile { justify-self: start; }
+      h1 { font-size: 34pt; }
+      .skills { grid-template-columns: 5em 1fr; gap: 10px; }
+      .job-heading, .job-meta { flex-wrap: wrap; gap: 4px 12px; }
+    }
+  </style>
+</head>
+<body>
+<main class="resume">
+  <header class="hero">
+    <div>
+      <h1>骆<span>建志</span></h1>
+      <p class="roman">LUO JIANZHI</p>
+      <p class="role">嵌入式软件工程师</p>
+      <p class="focus">BSP 移植<span>｜</span>底层调试<span>｜</span>系统构建</p>
+    </div>
+    <div class="profile">
+      <img class="qr" src="assets/qrcode.png" alt="联系二维码" width="100" height="100">
+      <div class="education"><strong>烟台大学</strong><br>轮机工程<br>统招本科</div>
+      <div class="contacts">
+        <a href="tel:17788705330"><span class="contact-label">电话</span>177-8870-5330</a>
+        <a href="mailto:luo_jianzhi@foxmail.com"><span class="contact-label">邮箱</span>luo_jianzhi@foxmail.com</a>
+      </div>
+    </div>
+  </header>
+  <section aria-labelledby="experience">
+    <h2 id="experience">工作经历</h2>
+    <article class="job">
+      <div class="job-heading"><h3>米尔电子（MYIR）</h3><span class="location">深圳</span></div>
+      <div class="job-meta"><span>嵌入式软件工程师</span><span class="dates">2024.07 - 至今</span></div>
+      <ul>
+        <li>Rockchip、Allwinner aarch64 平台的系统客户定制与交付</li>
+        <li>openEuler、OpenHarmony 等新系统先行移植；Rockchip ISP、网络 Switch、SerDes 等外设适配</li>
+        <li>持续优化 SDK 二次开发与文档使用体验，推动存量问题闭环解决</li>
+        <li>机器人数据采集系统开发，基于 PWM 实现多摄像头同步</li>
+        <li>疑难问题攻坚：解决个别 USB3.0 无法识别、eMMC 性能劣化导致应用 OTA 升级失败等问题；赴客户现场定位网络 Switch 随机掉线与设备掉电</li>
+      </ul>
+    </article>
+    <article class="job">
+      <div class="job-heading"><h3>深圳触觉智能</h3><span class="location">深圳</span></div>
+      <div class="job-meta"><span>嵌入式软件工程师</span><span class="dates">2023.04 - 2024.06</span></div>
+      <ul>
+        <li>RK3588/RK3588s Android 平台 BSP 移植、系统维护与客户项目定制</li>
+        <li>Android 平板项目的外设移植适配：电池、全功能 Type-C、IMU、Camera</li>
+        <li>设计 repo 与单 Git 仓库双向转换方案，兼顾多人协作效率与仓库性能</li>
+        <li>优化 Android 开发与使用体验：引入 GPIO Character Device 驱动、预装微信输入法等实用组件</li>
+      </ul>
+    </article>
+    <article class="job">
+      <div class="job-heading"><h3>深圳荣品电子</h3><span class="location">深圳</span></div>
+      <div class="job-meta"><span>嵌入式软件工程师</span><span class="dates">2021.10 - 2023.03</span></div>
+      <ul><li>RK/全志/Amlogic 多平台 SDK 维护与客户量产支持，外设接口测试与疑难问题解决</li></ul>
+    </article>
+  </section>
+  <section aria-labelledby="skills">
+    <h2 id="skills">技能</h2>
+    <dl class="skills">
+      <dt>开发方向</dt><dd>嵌入式 Linux BSP 移植、外设适配与底层问题定位</dd>
+      <dt>内核驱动</dt><dd>设备树配置、字符设备驱动开发；使用 ftrace、kprobe、eBPF、kdump/crash 调试内核</dd>
+      <dt>外设接口</dt><dd>USB3.0、eMMC、I2C、Ethernet 等接口的适配与问题排查</dd>
+      <dt>系统构建</dt><dd>基于 Yocto、Buildroot、Debian/Ubuntu、AOSP 进行系统构建与定制</dd>
+      <dt>芯片平台</dt><dd>Rockchip（RK3576/3588/356x）、Amlogic、全志平台开发经验</dd>
+      <dt>开发工具</dt><dd>C、Shell、Python 编程；Git/repo 版本管理；Makefile、CMake 构建工具</dd>
+      <dt>硬件调试</dt><dd>结合原理图、datasheet 和 SoC TRM 适配外设；熟练使用示波器、万用表排查板级问题</dd>
+    </dl>
+  </section>
+</main>
+</body>
+</html>
