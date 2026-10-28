@@ -3,7 +3,10 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 TEX_FILE="$SCRIPT_DIR/resume.tex"
-PDF_FILE="$SCRIPT_DIR/resume.pdf"
+OUTPUT_DIR="$SCRIPT_DIR/output/latex"
+PDF_FILE="$OUTPUT_DIR/resume.pdf"
+cd "$SCRIPT_DIR"
+mkdir -p "$OUTPUT_DIR"
 
 #-------------------------------------------------------------------------------
 # Check dependencies
@@ -54,16 +57,15 @@ fi
 # Compile (two passes to resolve any cross-refs)
 #-------------------------------------------------------------------------------
 echo "=== Compiling (pass 1/2) ==="
-xelatex -interaction=nonstopmode -halt-on-error "$TEX_FILE"
+xelatex -interaction=nonstopmode -halt-on-error -output-directory="$OUTPUT_DIR" "$TEX_FILE"
 
 echo "=== Compiling (pass 2/2) ==="
-xelatex -interaction=nonstopmode -halt-on-error "$TEX_FILE"
+xelatex -interaction=nonstopmode -halt-on-error -output-directory="$OUTPUT_DIR" "$TEX_FILE"
 
 #-------------------------------------------------------------------------------
 # Cleanup aux files
 #-------------------------------------------------------------------------------
 echo "=== Cleaning up ==="
-cd "$SCRIPT_DIR"
-rm -f resume.aux resume.log resume.out resume.synctex.gz
+rm -f "$OUTPUT_DIR"/resume.{aux,log,out,synctex.gz}
 
 echo "=== Done: $PDF_FILE ==="

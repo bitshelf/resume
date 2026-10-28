@@ -7,3 +7,8 @@
 # PDF 不入库存放，通过 Release 分发，稳定链接（随 main 自动更新）：
 # https://github.com/bitshelf/resume/releases/download/latest/resume.pdf
 *.pdf
+
+# HTML build dependencies and generated files
+node_modules/
+output/
+preview-*.png

@@ -4,75 +4,95 @@ on:
   push:
     branches: [main]
     tags: ['v*']
+  pull_request:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+concurrency:
+  group: resume-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
-    # 只用 checkout/docker/release，不再依赖 runner 的 apt（Ubuntu 源在部分 runner 上
-    # 反复挂死/超慢，2026-10 连续多晚观察到）；TeX Live 由预装镜像提供
     runs-on: ubuntu-24.04
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
-
-      - name: Build PDF
-        uses: xu-cheng/latex-action@v3
+      - uses: actions/setup-node@v4
         with:
-          root_file: resume.tex
-          latexmk_use_xelatex: true
-          args: "-interaction=nonstopmode -halt-on-error"
-
-      # 预览图：alpine 容器 + mupdf 栅格化（apk 走 Alpine CDN 绕开 Ubuntu 源；
-      # 注意 poppler 无法渲染 xelatex+Fandol 的 CFF 字形子集，勿换回 pdftoppm）
-      - name: Render preview images
+          node-version: '24'
+      - uses: pnpm/action-setup@v4
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Install Chromium
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Build HTML and PDF
+        run: pnpm build
+      - name: Build LaTeX PDF
         run: |
-          docker run --rm -v "$PWD:/work" -w /work alpine:3.20 \
-            sh -c "apk add -q mupdf-tools && mutool draw -o preview-%d.png -r 110 resume.pdf"
-          ls preview-*.png
+          bash build.sh
+          node --input-type=module -e '
+            import { readFile } from "node:fs/promises";
+            import { PDFDocument } from "pdf-lib";
+            const pdf = await PDFDocument.load(await readFile("output/latex/resume.pdf"));
+            if (pdf.getPageCount() !== 1) throw new Error("LaTeX resume must fit on one page");
+          '
+          cp output/latex/resume.pdf output/latex/resume-latex.pdf
 
-      # 制品不上传（私有库存储配额有限），PDF/预览图一律走 Release 资产分发
-      # 先清空滚动 Release 的旧资产（页数变化时避免残留过期预览图），再上传新文件
-      - name: Clean stale release assets
-        if: github.ref == 'refs/heads/main'
-        env:
-          GH_TOKEN: ${{ github.token }}
+      - name: Prepare GitHub Pages files
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         run: |
-          for id in $(gh api "repos/${{ github.repository }}/releases/tags/latest" --jq '.assets[].id' 2>/dev/null); do
-            gh api -X DELETE "repos/${{ github.repository }}/releases/assets/$id" && echo "deleted old asset $id"
-          done
-          true
+          mkdir -p output/pages
+          cp output/html/resume.html output/pages/index.html
+          cp output/html/resume.pdf output/pages/resume.pdf
+          cp output/latex/resume-latex.pdf output/pages/resume-latex.pdf
+      - name: Upload GitHub Pages artifact
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: output/pages
 
-      # main 每次推送更新滚动 Release，提供稳定分享链接：
-      # https://github.com/bitshelf/resume/releases/download/latest/resume.pdf
       - name: Rolling latest release
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         uses: softprops/action-gh-release@v2
         with:
           tag_name: latest
+          target_commitish: ${{ github.sha }}
           name: 最新简历（自动构建）
-          body: |
-            每次推送到 main 自动更新，无需手动维护。
-
-            - [下载 resume.pdf](https://github.com/bitshelf/resume/releases/download/latest/resume.pdf)
           prerelease: true
+          body: 每次推送到 main 自动生成 HTML 版和 LaTeX 版 PDF，附带可离线打开的 HTML。
+          fail_on_unmatched_files: true
           files: |
-            resume.pdf
-            preview-*.png
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            output/html/resume.html
+            output/html/resume.pdf
+            output/latex/resume-latex.pdf
+            output/html/preview-*.png
 
-      - name: Create Release (tag)
-        if: startsWith(github.ref, 'refs/tags/')
+      - name: Tagged release
+        if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
+          fail_on_unmatched_files: true
           files: |
-            resume.pdf
-            preview-*.png
-          generate_release_notes: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            output/html/resume.html
+            output/html/resume.pdf
+            output/latex/resume-latex.pdf
+            output/html/preview-*.png
+
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-24.04
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -3,30 +3,63 @@
 %    骆建志 · 嵌入式软件工程师简历
 %    模板：Awesome-CV（awesome-cv.cls 随仓库分发，LPPL）
 %    编译：xelatex resume.tex && xelatex resume.tex
+%    隐藏单条经历或技能：在对应的 \item 或 \cvskill 行前加 %。
+%    网页专有条目默认注释保留，取消注释即可加入 PDF。
 %
 %============================================================================%
 \documentclass[11pt, a4paper]{awesome-cv}
 
 % 中文支持：TeX Live 自带 Fandol 字体，不依赖系统字体，构建可复现
 \usepackage[UTF8,fontset=fandol]{ctex}
+\definecolor{resumeaccent}{HTML}{11675F}
+\colorlet{awesome}{resumeaccent}
 
 % 中文章节标题整体使用强调色，避免模板仅着色前三个字。
 \renewcommand*{\sectionstyle}[1]{{\color{awesome}\sectionstyleface{#1}}}
 
-% 单页排版：收紧上下边距（节间距保持模板默认）
+% 单页排版：收紧上下边距、章节与经历之间的留白
 \geometry{left=1.6cm, right=1.6cm, top=1.2cm, bottom=1.1cm}
+\renewcommand{\acvSectionTopSkip}{1.5mm}
+\renewcommand{\acvSectionContentTopSkip}{1.5mm}
 
 %-------------------------------------------------------------------------------
 %    头部
 %-------------------------------------------------------------------------------
-\name{骆建志}{}
-\position{嵌入式软件工程师{\enspace·\enspace}BSP 移植 · 底层调试 · 系统构建}
-
 \begin{document}
 
-% 使用去掉城市和日期的页眉横幅；裁去生成图片上下的黑色留边。
-\noindent\includegraphics[width=\textwidth,trim=0 72bp 0 70bp,clip]{assets/resume-header-no-location-date.png}
-\par\vspace{2mm}
+% 页眉保留为文字，姓名、岗位、学历与联系方式均可单独编辑。
+\noindent
+\begin{minipage}[c]{.56\textwidth}
+  {\fontsize{30pt}{34pt}\selectfont\bfseries 骆建志\par}
+  \vspace{2mm}
+  {\large\bfseries 嵌入式软件工程师\par}
+  \vspace{1mm}
+  {\small BSP 移植 \quad 底层调试 \quad 系统构建\par}
+\end{minipage}\hfill
+\begin{minipage}[c]{19mm}
+  \includegraphics[width=\linewidth]{assets/qrcode.png}
+\end{minipage}\hfill
+\begin{minipage}[c]{.30\textwidth}
+  \small
+  \textbf{烟台大学}\par
+  轮机工程 · 统招本科\par
+  \href{tel:17788705330}{177-8870-5330}\par
+  \href{mailto:luo_jianzhi@foxmail.com}{luo\_jianzhi@foxmail.com}\par
+\end{minipage}
+\par\vspace{3mm}
+{\color{awesome}\hrule height .6pt}
+\vspace{1mm}
+
+%-------------------------------------------------------------------------------
+%    职业概述
+%-------------------------------------------------------------------------------
+\cvsection{职业概述}
+
+\begin{cvparagraph}
+5 年嵌入式 Linux BSP 与系统软件经验，覆盖 Rockchip RK356x / RK3576 / RK3588 / RK3588s、Amlogic、全志 ARM64 平台，独立完成从 Bootloader、内核与设备树、根文件系统到可烧录镜像的交付。
+熟练结合原理图、datasheet、SoC TRM 与示波器 / 万用表做板级定位，处理过内核 panic、PREEMPT\_RT 偶发卡死、USB3.0 枚举异常、eMMC 性能劣化等疑难问题。
+具备 Android 平板低功耗优化、多路 Camera / ISP 调试环境搭建与客户现场量产支持经验，并自建 Agent 自动化调试与老化压测工具链。
+\end{cvparagraph}
 
 %-------------------------------------------------------------------------------
 %    工作经历
@@ -41,13 +74,19 @@
   {深圳}
   {2024.07 - 至今}
   {\begin{cvitems}
-    \item Rockchip、Allwinner aarch64 平台的系统客户定制与交付
-    \item openEuler、OpenHarmony 等新系统先行移植；Rockchip ISP、网络 Switch、SerDes 等外设适配
-    \item 持续优化 SDK 二次开发与文档使用体验，推动存量问题闭环解决
-    \item 机器人数据采集系统开发，基于 PWM 实现多摄像头同步
-    \item 疑难问题攻坚：解决个别 USB3.0 无法识别、eMMC 性能劣化导致应用 OTA 升级失败等问题；赴客户现场定位网络 Switch 随机掉线与设备掉电
+    \item Rockchip、Allwinner ARM64 平台系统定制与交付
+    \item 为 RK3588、RK3576 SDK 适配 Ubuntu，并利用 GitHub Actions 构建生成可直接烧录的完整系统镜像
+    \item 适配与移植 openEuler、电鸿、OpenHarmony 系统
+    \item 搭建 Camera ISP 调试环境，开发 Android 多路 AHD 摄像头应用
+    \item 适配网络交换芯片（Switch）和 SerDes
+%   \item 持续优化 SDK 二次开发与文档使用体验，推动存量问题闭环解决
+    \item 协助开发机器人多路摄像头同步数采方案，解决 PWM 使用过程中奇怪问题
+    \item 解决 USB3.0 识别异常、eMMC 性能劣化导致应用 OTA 升级失败等问题
+    \item 赴客户现场定位网络 Switch 随机掉线与设备掉电问题
+    \item 通过项目协作，帮助两位此前没有相关经验的新同事上手，直至能够独立完成项目
   \end{cvitems}}
 
+\vspace{-6mm}
 \cventry
   {嵌入式软件工程师}
   {深圳触觉智能}
@@ -56,10 +95,12 @@
   {\begin{cvitems}
     \item RK3588/RK3588s Android 平台 BSP 移植、系统维护与客户项目定制
     \item Android 平板项目的外设移植适配：电池、全功能 Type-C、IMU、Camera
-    \item 设计 repo 与单 Git 仓库双向转换方案，兼顾多人协作效率与仓库性能
-    \item 优化 Android 开发与使用体验：引入 GPIO Character Device 驱动、预装微信输入法等实用组件
+    \item 独立完成 Android 平板的低功耗调试与优化，了解运行态与系统休眠的功耗管理机制
+    \item 设计 repo 与单 Git 仓库双向转换方案，支持不同代码管理方式间的转换
+%   \item 优化 Android 开发与使用体验：引入 GPIO Character Device 驱动、预装微信输入法等实用组件
   \end{cvitems}}
 
+\vspace{-6mm}
 \cventry
   {嵌入式软件工程师}
   {深圳荣品电子}
@@ -78,6 +119,18 @@
 %  {从机械非标设计与变频器等工业电气设备维修起步，期间自学 C、Linux、网络与 ARM 开发板编程，转向嵌入式软件开发}
 
 \end{cventries}
+\vspace{-6mm}
+
+%-------------------------------------------------------------------------------
+%    AI 自动化工作流（每句可单独注释）
+%-------------------------------------------------------------------------------
+\cvsection{AI 自动化工作流}
+
+\begin{cvparagraph}
+搭建 Agent 自动化调试与测试流程，开发运行在服务器的 Rust 串口 MCP 工具，并搭建低成本硬件调试方案。%
+编写 Agent Skill，将常用调试与测试步骤整理为可复用流程。%
+提高工作效率以及解决疑难杂症，定位并解决 PREEMPT\_RT 偶发卡死，网络交换机调试、内核 panic 排查和自动化老化压测
+\end{cvparagraph}
 
 %-------------------------------------------------------------------------------
 %    技能
@@ -86,11 +139,11 @@
 
 \begin{cvskills}
   \cvskill{开发方向}{嵌入式 Linux BSP 移植、外设适配与底层问题定位}
-  \cvskill{内核驱动}{设备树配置、字符设备驱动开发；使用 ftrace、kprobe、eBPF、kdump/crash 调试内核}
+  \cvskill{内核驱动}{设备树配置、设备驱动开发；使用 ftrace、kprobe、eBPF、kdump/crash 调试内核}
   \cvskill{外设接口}{USB3.0、eMMC、I2C、Ethernet 等接口的适配与问题排查}
-  \cvskill{系统构建}{基于 Yocto、Buildroot、Debian/Ubuntu、AOSP 进行系统构建与定制}
+  \cvskill{系统构建}{熟悉 Yocto、Buildroot、Debian/Ubuntu、AOSP 系统构建与定制优化}
   \cvskill{芯片平台}{Rockchip（RK3576/3588/356x）、Amlogic、全志平台开发经验}
-  \cvskill{开发工具}{C、Shell、Python 编程；Git/repo 版本管理；Makefile、CMake 构建工具}
+  \cvskill{开发工具}{C、Shell、Git/repo、Makefile}
   \cvskill{硬件调试}{结合原理图、datasheet 和 SoC TRM 适配外设；熟练使用示波器、万用表排查板级问题}
 \end{cvskills}
 

@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="骆建志 · 嵌入式软件工程师，BSP 移植、底层调试与系统构建">
+  <title>骆建志 · 嵌入式软件工程师</title>
+  <style>
+    @font-face { font-family: Noto; src: url('fonts/NotoSansSC.ttf') format('truetype'); font-weight: 100 900; font-display: swap; }
+    @font-face { font-family: Source; src: url('fonts/SourceSans3-Regular.otf') format('opentype'); font-weight: 400; }
+    @font-face { font-family: Source; src: url('fonts/SourceSans3-Bold.otf') format('opentype'); font-weight: 700; }
+    :root { --red: #d91c26; --ink: #222b35; --muted: #66717d; --line: #dce1e6; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #edf0f3; color: var(--ink); font-family: Source, Noto, sans-serif; font-size: 10pt; line-height: 1.65; }
+    .resume { width: 210mm; min-height: 297mm; margin: 24px auto; padding: 14mm 16mm; background: white; box-shadow: 0 8px 40px #192b3d12; }
+    a { color: inherit; text-decoration: none; }
+    a:hover { color: var(--red); }
+    .hero { display: grid; grid-template-columns: 1fr auto; gap: 14px; align-items: center; padding-bottom: 7mm; border-bottom: 3px solid var(--red); }
+    h1 { margin: 0 0 16px; font-size: 37pt; font-weight: 700; line-height: 1.2; letter-spacing: 2px; color: var(--ink); }
+    .role { margin: 0 0 5px; font-size: 14pt; font-weight: 700; }
+    .focus { margin: 0; font-size: 10pt; color: var(--muted); }
+    .focus span { color: var(--muted); padding: 0 7px; }
+    .profile { display: grid; grid-template-columns: 20mm auto; gap: 10px 14px; align-items: start; }
+    .qr { width: 20mm; height: 20mm; object-fit: contain; grid-row: 1 / span 2; align-self: center; }
+    .education { display: flex; gap: 9px; line-height: 1.55; font-size: 9pt; }
+    .education strong { font-size: 11pt; font-weight: 400; }
+    .education small { font-size: 9pt; color: var(--muted); white-space: nowrap; }
+    .contacts { grid-column: 2; display: grid; gap: 8px; font-size: 10pt; white-space: nowrap; }
+    .contacts a { display: flex; align-items: center; gap: 9px; }
+    .contact-icon { width: 19px; height: 19px; flex: none; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; color: var(--red); }
+    .education .contact-icon { width: 23px; height: 23px; margin-left: -2px; margin-right: -2px; }
+    section { margin-top: 7mm; }
+    h2 { display: flex; align-items: center; gap: 12px; margin: 0 0 4mm; font-size: 17pt; line-height: 1.3; color: var(--red); }
+    h2::after { content: ''; height: 1px; flex: 1; background: var(--line); }
+    .job { margin-bottom: 5mm; break-inside: avoid; }
+    .job:last-child { margin-bottom: 0; }
+    .job-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+    h3 { margin: 0; font-size: 11.5pt; font-weight: 700; }
+    .location { color: var(--muted); font-size: 9pt; }
+    .job-meta { display: flex; justify-content: space-between; gap: 12px; margin: 1mm 0 2mm; font-size: 9pt; color: var(--muted); }
+    .dates { font-variant-numeric: tabular-nums; white-space: nowrap; }
+    ul { margin: 0; padding-left: 1.2em; }
+    li { margin: 0.6mm 0; padding-left: 1px; }
+    li::marker { color: var(--muted); font-size: 0.8em; }
+    .skills { display: grid; grid-template-columns: 22mm 1fr; gap: 2mm 3mm; margin: 0; }
+    dt { font-weight: 700; }
+    dd { margin: 0; }
+    @page { size: A4; margin: 0; }
+    @media print {
+      html, body { width: 210mm; margin: 0; background: white; }
+      body { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      .resume { margin: 0; box-shadow: none; }
+      a:hover { color: inherit; }
+    }
+    @media screen and (max-width: 800px) {
+      body { background: white; }
+      .resume { width: 100%; min-height: auto; margin: 0; padding: 28px 22px; box-shadow: none; }
+      .hero { grid-template-columns: 1fr; gap: 24px; }
+      .profile { justify-self: start; }
+      h1 { font-size: 34pt; }
+      .skills { grid-template-columns: 5em 1fr; gap: 10px; }
+      .job-heading, .job-meta { flex-wrap: wrap; gap: 4px 12px; }
+    }
+
+    /* Screen presentation and the concise A4 edition share one source. */
+    :root { --red: #11675f; --ink: #172d36; --muted: #61747b; --line: #dce6e5; }
+    body { background: #eef3f2; font-size: 15px; line-height: 1.85; }
+    .resume { width: min(1080px, calc(100% - 64px)); min-height: auto; padding: 54px 64px; margin: 40px auto; border-top: 5px solid var(--red); border-radius: 4px; }
+    .hero { padding-bottom: 30px; border-bottom: 1px solid var(--line); }
+    h1 { font-size: 48px; margin-bottom: 14px; }
+    .role { font-size: 21px; }
+    .focus { font-size: 13px; }
+    section { margin-top: 36px; }
+    h2 { font-size: 23px; margin-bottom: 20px; }
+    h3 { font-size: 17px; }
+    .job { padding-left: 20px; border-left: 2px solid var(--line); margin-bottom: 26px; }
+    .job-meta, .location { font-size: 13px; }
+    .skills { grid-template-columns: 6em 1fr; gap: 12px 24px; }
+    .eyebrow { color: var(--red); font-size: 12px; font-weight: 700; letter-spacing: 2px; margin: 0 0 10px; }
+    .case { padding: 28px; background: #f3f8f7; border: 1px solid var(--line); border-radius: 12px; }
+    .download { display: inline-flex; justify-self: start; margin-top: 4px; padding: 6px 15px; background: var(--red); color: white; border-radius: 5px; font-size: 13px; }
+    .download:hover { color: white; background: #0c514b; }
+    @media screen and (max-width: 800px) {
+      .resume { width: 100%; margin: 0; padding: 30px 22px; border-radius: 0; }
+      .hero { gap: 24px; } .case { padding: 18px; }
+      .skills { grid-template-columns: 5em 1fr; gap: 12px; }
+      .contacts { white-space: normal; overflow-wrap: anywhere; } h1 { font-size: 42px; }
+    }
+    @media print {
+      .screen-only { display: none !important; }
+      body { font-size: 9pt; line-height: 1.55; }
+      .resume { width: 210mm; min-height: 297mm; margin: 0; padding: 11mm 15mm; border: 0; border-radius: 0; }
+      .hero { padding-bottom: 5mm; border-bottom: 2px solid var(--red); }
+      h1 { font-size: 32pt; margin-bottom: 10px; } .role { font-size: 13pt; } .focus { font-size: 9pt; }
+      section { margin-top: 4.5mm; } h2 { font-size: 15pt; margin-bottom: 2.5mm; }
+      h3 { font-size: 10.5pt; } .job { padding-left: 0; border: 0; margin-bottom: 3mm; }
+      .job-meta, .location { font-size: 8.5pt; } .job-meta { margin: .5mm 0 1mm; }
+      li { margin: .35mm 0; } .skills { grid-template-columns: 19mm 1fr; gap: 1.2mm 3mm; }
+      .case { padding: 3mm 4mm; border-radius: 3px; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+<main class="resume">
+  <header class="hero">
+    <div>
+      <p class="eyebrow screen-only">EMBEDDED SYSTEMS / LINUX & ANDROID</p><h1>骆建志</h1>
+      <p class="role">嵌入式软件工程师</p>
+      <p class="focus">BSP 移植<span>｜</span>底层调试<span>｜</span>系统构建</p>
+    </div>
+    <div class="profile">
+      <img class="qr" src="assets/qrcode.png" alt="联系二维码" width="100" height="100">
+      <div class="education"><svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" stroke="none" d="m1 8 11-5 11 5-11 5Zm4 4 7 3 7-3v6c-4 3-10 3-14 0Z"/><path d="M22 9v7" stroke-width="1.6"/></svg><div><strong>烟台大学</strong><br><small>轮机工程 · 统招本科</small></div></div>
+      <div class="contacts">
+        <a href="tel:17788705330" aria-label="电话：17788705330"><svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.4 2.1L8.1 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.6 1.9Z"/></svg>177-8870-5330</a>
+        <a href="mailto:luo_jianzhi@foxmail.com" aria-label="邮箱：luo_jianzhi@foxmail.com"><svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" fill="currentColor" stroke="none"/><path d="m2 5 10 8L22 5" stroke="white" stroke-width="1.5"/></svg>luo_jianzhi@foxmail.com</a>
+        <a class="download screen-only" href="resume.pdf" download>下载一页 PDF 简历 ↗</a>
+      </div>
+    </div>
+  </header>
+  <section aria-labelledby="experience">
+    <h2 id="experience">工作经历</h2>
+    <article class="job">
+      <div class="job-heading"><h3>米尔电子（MYIR）</h3><span class="location">深圳</span></div>
+      <div class="job-meta"><span>嵌入式软件工程师</span><span class="dates">2024.07 - 至今</span></div>
+      <ul>
+        <li>Rockchip、Allwinner ARM64 平台系统定制与交付</li>
+        <li>为 RK3588、RK3576 SDK 适配 Ubuntu，并利用 GitHub Actions 构建生成可直接烧录的完整系统镜像</li>
+        <li>适配与移植 openEuler、电鸿、OpenHarmony 系统</li>
+        <li>搭建 Camera ISP 调试环境，开发 Android 多路 AHD 摄像头应用</li>
+        <li>适配网络交换芯片（Switch）和 SerDes</li>
+        <li class="screen-only">持续优化 SDK 二次开发与文档使用体验，推动存量问题闭环解决</li>
+        <li>协助开发机器人多路摄像头同步数采方案，解决 PWM 使用过程中奇怪问题</li>
+        <li>解决 USB3.0 识别异常、eMMC 性能劣化导致应用 OTA 升级失败等问题</li>
+        <li>赴客户现场定位网络 Switch 随机掉线与设备掉电问题</li>
+        <li>通过项目协作，帮助两位此前没有相关经验的新同事上手，直至能够独立完成项目</li>
+      </ul>
+    </article>
+    <article class="job">
+      <div class="job-heading"><h3>深圳触觉智能</h3><span class="location">深圳</span></div>
+      <div class="job-meta"><span>嵌入式软件工程师</span><span class="dates">2023.04 - 2024.06</span></div>
+      <ul>
+        <li>RK3588/RK3588s Android 平台 BSP 移植、系统维护与客户项目定制</li>
+        <li>Android 平板项目的外设移植适配：电池、全功能 Type-C、IMU、Camera</li>
+        <li>独立完成 Android 平板的低功耗调试与优化，了解运行态与系统休眠的功耗管理机制</li>
+        <li>设计 repo 与单 Git 仓库双向转换方案，支持不同代码管理方式间的转换</li>
+        <li class="screen-only">优化 Android 开发与使用体验：引入 GPIO Character Device 驱动、预装微信输入法等实用组件</li>
+      </ul>
+    </article>
+    <article class="job">
+      <div class="job-heading"><h3>深圳荣品电子</h3><span class="location">深圳</span></div>
+      <div class="job-meta"><span>嵌入式软件工程师</span><span class="dates">2021.10 - 2023.03</span></div>
+      <ul><li>RK/全志/Amlogic 多平台 SDK 维护与客户量产支持，外设接口测试与疑难问题解决</li></ul>
+    </article>
+  </section>
+  <section aria-labelledby="agent-workflow">
+    <h2 id="agent-workflow">AI 自动化工作流</h2>
+    <div class="case">搭建 Agent 自动化调试与测试流程，开发运行在服务器的 Rust 串口 MCP 工具，并搭建低成本硬件调试方案。编写 Agent Skill，将常用调试与测试步骤整理为可复用流程。提高工作效率以及解决疑难杂症，定位并解决 PREEMPT_RT 偶发卡死，网络交换机调试、内核 panic 排查和自动化老化压测</div>
+  </section>
+  <section aria-labelledby="skills">
+    <h2 id="skills">技能</h2>
+    <dl class="skills">
+      <dt>开发方向</dt><dd>嵌入式 Linux BSP 移植、外设适配与底层问题定位</dd>
+      <dt>内核驱动</dt><dd>设备树配置、设备驱动开发；使用 ftrace、kprobe、eBPF、kdump/crash 调试内核</dd>
+      <dt>外设接口</dt><dd>USB3.0、eMMC、I2C、Ethernet 等接口的适配与问题排查</dd>
+      <dt>系统构建</dt><dd>熟悉 Yocto、Buildroot、Debian/Ubuntu、AOSP 系统构建与定制优化</dd>
+      <dt>芯片平台</dt><dd>Rockchip（RK3576/3588/356x）、Amlogic、全志平台开发经验</dd>
+      <dt>开发工具</dt><dd>C、Shell、Git/repo、Makefile</dd>
+      <dt>硬件调试</dt><dd>结合原理图、datasheet 和 SoC TRM 适配外设；熟练使用示波器、万用表排查板级问题</dd>
+    </dl>
+  </section>
+</main>
+</body>
+</html>
