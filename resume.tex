@@ -23,13 +23,18 @@
 
 \makecvheader
 
-% 右上角信息块：学历两行在二维码右侧，电话/邮箱一行在其下方（整体收进一个 tabular）
+% 右上角信息块：二维码与学历整体垂直居中，联系方式独立一行。
 \begin{tikzpicture}[remember picture, overlay]
-  \node[anchor=north east, inner sep=0pt] at ([xshift=-1.45cm, yshift=-1.2cm]current page.north east) {%
-    \begin{tabular}{@{}c@{\hspace{7pt}}r@{}}
-      \includegraphics[width=1.7cm]{assets/qrcode} & {\scriptsize\color{darktext} 烟台大学}\\[-1pt]
-                                                       & {\scriptsize\color{darktext} 轮机工程·统招本科}\\[3pt]
-      \multicolumn{2}{r@{}}{\scriptsize\color{darktext} 177-8870-5330{\enspace·\enspace}luo\_jianzhi@foxmail.com}\\
+  \node[anchor=north east, inner sep=0pt] at ([xshift=-1.6cm, yshift=-1.2cm]current page.north east) {%
+    \begin{tabular}{@{}r@{}}
+      \begin{tabular}{@{}m{1.7cm}@{\hspace{10pt}}r@{}}
+        \includegraphics[width=\linewidth]{assets/qrcode} &
+        \begin{tabular}{@{}r@{}}
+          {\small\color{darktext} 烟台大学}\\[4pt]
+          {\scriptsize\color{graytext} 轮机工程\enspace·\enspace 统招本科}
+        \end{tabular}
+      \end{tabular}\\[5pt]
+      {\scriptsize\color{darktext}\href{tel:17788705330}{177-8870-5330}{\enspace·\enspace}\href{mailto:luo_jianzhi@foxmail.com}{luo\_jianzhi@foxmail.com}}
     \end{tabular}};
 \end{tikzpicture}
 
