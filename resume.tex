@@ -10,6 +10,9 @@
 % 中文支持：TeX Live 自带 Fandol 字体，不依赖系统字体，构建可复现
 \usepackage[UTF8,fontset=fandol]{ctex}
 
+% 中文章节标题整体使用强调色，避免模板仅着色前三个字。
+\renewcommand*{\sectionstyle}[1]{{\color{awesome}\sectionstyleface{#1}}}
+
 % 单页排版：收紧上下边距（节间距保持模板默认）
 \geometry{left=1.6cm, right=1.6cm, top=1.2cm, bottom=1.1cm}
 
