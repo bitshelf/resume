@@ -78,26 +78,16 @@
     .skills { grid-template-columns: 6em 1fr; gap: 12px 24px; }
     .eyebrow { color: var(--red); font-size: 12px; font-weight: 700; letter-spacing: 2px; margin: 0 0 10px; }
     .case { padding: 28px; background: #f3f8f7; border: 1px solid var(--line); border-radius: 12px; }
-    .case-head { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; }
-    .tag { color: var(--red); font-size: 12px; white-space: nowrap; }
-    .case-intro { margin: 12px 0 20px; color: var(--muted); font-size: 14px; }
-    .case-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-    .case-card { background: white; border: 1px solid var(--line); padding: 20px; border-radius: 8px; }
-    .case-card h4 { margin: 0 0 12px; font-size: 16px; }
-    .case-card p { margin: 8px 0; font-size: 13px; }
-    .case-card b { color: var(--red); }
-    .case-foot { margin: 18px 0 0; font-size: 13px; color: var(--muted); }
-    .print-only { display: none; }
     .download { display: inline-flex; justify-self: start; margin-top: 4px; padding: 6px 15px; background: var(--red); color: white; border-radius: 5px; font-size: 13px; }
     .download:hover { color: white; background: #0c514b; }
     @media screen and (max-width: 800px) {
       .resume { width: 100%; margin: 0; padding: 30px 22px; border-radius: 0; }
-      .hero { gap: 24px; } .case { padding: 18px; } .case-grid { grid-template-columns: 1fr; }
-      .case-head { display: block; } .skills { grid-template-columns: 5em 1fr; gap: 12px; }
+      .hero { gap: 24px; } .case { padding: 18px; }
+      .skills { grid-template-columns: 5em 1fr; gap: 12px; }
       .contacts { white-space: normal; overflow-wrap: anywhere; } h1 { font-size: 42px; }
     }
     @media print {
-      .screen-only { display: none !important; } .print-only { display: block; }
+      .screen-only { display: none !important; }
       body { font-size: 9pt; line-height: 1.55; }
       .resume { width: 210mm; min-height: 297mm; margin: 0; padding: 11mm 15mm; border: 0; border-radius: 0; }
       .hero { padding-bottom: 5mm; border-bottom: 2px solid var(--red); }
@@ -107,8 +97,6 @@
       .job-meta, .location { font-size: 8.5pt; } .job-meta { margin: .5mm 0 1mm; }
       li { margin: .35mm 0; } .skills { grid-template-columns: 19mm 1fr; gap: 1.2mm 3mm; }
       .case { padding: 3mm 4mm; border-radius: 3px; break-inside: avoid; }
-      .case-head { gap: 5px; } .tag { font-size: 8pt; }
-      .case ul { margin-top: 1.5mm; } .case li { font-size: 8.7pt; }
     }
   </style>
 </head>
@@ -137,11 +125,15 @@
       <div class="job-meta"><span>嵌入式软件工程师</span><span class="dates">2024.07 - 至今</span></div>
       <ul>
         <li>Rockchip、Allwinner ARM64 平台系统定制与交付</li>
-        <li>开展 openEuler、电鸿、OpenHarmony 的系统适配与移植，以及 Rockchip ISP、网络 Switch、SerDes 外设适配</li>
+        <li>为 RK3588、RK3576 SDK 适配 Ubuntu，并利用 GitHub Actions 构建生成可直接烧录的完整系统镜像</li>
+        <li>适配与移植 openEuler、电鸿、OpenHarmony 系统</li>
+        <li>搭建 Camera ISP 调试环境，开发 Android 多路 AHD 摄像头应用</li>
+        <li>适配网络交换芯片（Switch）和 SerDes</li>
         <li class="screen-only">持续优化 SDK 二次开发与文档使用体验，推动存量问题闭环解决</li>
-        <li>机器人数据采集系统开发，基于 PWM 实现多摄像头同步</li>
+        <li>协助开发机器人多路摄像头同步数采方案，解决 PWM 使用过程中奇怪问题</li>
         <li>解决 USB3.0 识别异常、eMMC 性能劣化导致应用 OTA 升级失败等问题</li>
         <li>赴客户现场定位网络 Switch 随机掉线与设备掉电问题</li>
+        <li>通过项目协作，帮助两位此前没有相关经验的新同事上手，直至能够独立完成项目</li>
       </ul>
     </article>
     <article class="job">
@@ -150,6 +142,7 @@
       <ul>
         <li>RK3588/RK3588s Android 平台 BSP 移植、系统维护与客户项目定制</li>
         <li>Android 平板项目的外设移植适配：电池、全功能 Type-C、IMU、Camera</li>
+        <li>独立完成 Android 平板的低功耗调试与优化，了解运行态与系统休眠的功耗管理机制</li>
         <li>设计 repo 与单 Git 仓库双向转换方案，支持不同代码管理方式间的转换</li>
         <li class="screen-only">优化 Android 开发与使用体验：引入 GPIO Character Device 驱动、预装微信输入法等实用组件</li>
       </ul>
@@ -160,30 +153,19 @@
       <ul><li>RK/全志/Amlogic 多平台 SDK 维护与客户量产支持，外设接口测试与疑难问题解决</li></ul>
     </article>
   </section>
-  <section aria-labelledby="power">
-    <h2 id="power">低功耗实践</h2>
-    <article class="case">
-      <div class="case-head"><h3>Android 平台低功耗调试</h3><span class="tag">RK3588 · RK3576</span></div>
-      <ul><li>参与 RK3588 / RK3576 Android 平台低功耗调试。</li></ul>
-      <details class="screen-only"><summary style="margin-top:16px;cursor:pointer;color:var(--red)">展开低功耗技术思路</summary><p class="case-intro">以下为运行时、系统休眠及板级功耗的通用分析框架，用于说明技术思路。</p>
-      <div class="case-grid screen-only">
-        <div class="case-card"><h4>01 / 运行时：让空闲资源真正休息</h4><p><b>原理</b> CPUFreq 按负载调频，CPUIdle 在 CPU 空闲时进入低功耗状态；设备 Runtime PM 独立管理外设的运行态与挂起态。</p><p><b>典型现象</b> 业务已停止，整机电流仍高；周期性轮询或中断导致 CPU 难以进入深度空闲。</p><p><b>排查与应用</b> 关联 ftrace、CPU 空闲驻留与中断计数，查看设备 power/runtime_status；核对 PM 引用配对、autosuspend 延时及 clock / regulator 释放条件。</p><p><b>验证</b> 对比同一负载下的平均电流、空闲驻留和响应延迟，评估节能与恢复开销。</p></div>
-        <div class="case-card"><h4>02 / 系统休眠：打通休眠与唤醒链路</h4><p><b>原理</b> Android 释放休眠阻塞后，经系统 suspend 冻结任务、挂起设备并进入平台支持的睡眠状态；灭屏并不代表系统已经休眠。</p><p><b>典型现象</b> 灭屏后无法休眠、刚睡即醒，或恢复后 USB / 网络等外设异常。</p><p><b>排查与应用</b> 结合 Android wakelock、内核 wakeup_sources 和 suspend/resume trace 定位阻塞与唤醒来源；按内核支持情况使用 pm_test 分阶段定位回调问题，核对唤醒 IRQ 及外设恢复顺序。</p><p><b>验证</b> 检查实际休眠状态、休眠电流与唤醒延迟，执行定时 / 按键唤醒及多轮恢复测试。</p></div>
-        <div class="case-card"><h4>03 / 板级：定位软件之外的静态消耗</h4><p><b>原理</b> 设备休眠仍可能存在供电未关闭、IO 反向灌电或引脚状态不当等额外消耗。</p><p><b>排查与应用</b> 结合原理图核对 PMIC / regulator、时钟与电源域依赖，检查 pinctrl sleep、GPIO 上下拉及外设关电时序；对照电源轨测量定位耗电来源。</p><p><b>验证</b> 保留必要唤醒通路，检查关电与恢复后的功能和电平，避免以失去唤醒能力换取较低电流。</p></div>
-        <div class="case-card"><h4>04 / 测量：建立可复现的功耗基线</h4><p><b>方法</b> 固定供电电压、外设、屏幕、网络、温度与业务负载，分别测量运行、空闲、灭屏和系统休眠。</p><p><b>应用</b> 用电流波形与 PM trace 对齐状态切换；隔离单个外设或单项配置做对照，减少串口日志等调试行为对结果的干扰。</p><p><b>验收</b> 同时记录平均 / 峰值电流、状态驻留、唤醒时延及循环成功率；比较能耗时计入休眠进入与恢复开销。</p></div>
-      </div>
-      <p class="case-foot screen-only">技术参考：<a href="https://docs.kernel.org/power/runtime_pm.html">Linux Runtime PM</a> · <a href="https://docs.kernel.org/admin-guide/pm/sleep-states.html">System Sleep States</a> · <a href="https://source.android.com/docs/core/power/systemsuspend">Android SystemSuspend</a></p></details>
-    </article>
+  <section aria-labelledby="agent-workflow">
+    <h2 id="agent-workflow">AI 自动化工作流</h2>
+    <div class="case">搭建 Agent 自动化调试与测试流程，开发运行在服务器的 Rust 串口 MCP 工具，并搭建低成本硬件调试方案。编写 Agent Skill，将常用调试与测试步骤整理为可复用流程。提高工作效率以及解决疑难杂症，定位并解决 PREEMPT_RT 偶发卡死，网络交换机调试、内核 panic 排查和自动化老化压测</div>
   </section>
   <section aria-labelledby="skills">
     <h2 id="skills">技能</h2>
     <dl class="skills">
       <dt>开发方向</dt><dd>嵌入式 Linux BSP 移植、外设适配与底层问题定位</dd>
-      <dt>内核驱动</dt><dd>设备树配置、字符设备驱动开发；使用 ftrace、kprobe、eBPF、kdump/crash 调试内核</dd>
+      <dt>内核驱动</dt><dd>设备树配置、设备驱动开发；使用 ftrace、kprobe、eBPF、kdump/crash 调试内核</dd>
       <dt>外设接口</dt><dd>USB3.0、eMMC、I2C、Ethernet 等接口的适配与问题排查</dd>
-      <dt>系统构建</dt><dd>基于 Yocto、Buildroot、Debian/Ubuntu、AOSP 进行系统构建与定制</dd>
+      <dt>系统构建</dt><dd>熟悉 Yocto、Buildroot、Debian/Ubuntu、AOSP 系统构建与定制优化</dd>
       <dt>芯片平台</dt><dd>Rockchip（RK3576/3588/356x）、Amlogic、全志平台开发经验</dd>
-      <dt>开发工具</dt><dd>C、Shell、Python 编程；Git/repo 版本管理；Makefile 构建工具</dd>
+      <dt>开发工具</dt><dd>C、Shell、Git/repo、Makefile</dd>
       <dt>硬件调试</dt><dd>结合原理图、datasheet 和 SoC TRM 适配外设；熟练使用示波器、万用表排查板级问题</dd>
     </dl>
   </section>
