@@ -63,7 +63,6 @@ jobs:
           target_commitish: ${{ github.sha }}
           name: 最新简历（自动构建）
           prerelease: true
-          body: 每次推送到 main 自动生成 HTML 版和 LaTeX 版 PDF，附带可离线打开的 HTML。
           fail_on_unmatched_files: true
           files: |
             output/html/resume.html
